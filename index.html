@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ByteWeave Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <style>
+    .menu-popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      z-index: 50;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .menu-popup a {
+      color: white;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    .menu-popup a:hover {
+      color: #3b82f6;
+    }
+
+    .menu-popup button {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2rem;
+      color: white;
+    }
+
+    .btn-animate {
+      transition: all 0.3s ease;
+    }
+
+    .btn-animate:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white scroll-smooth">
+
+<!-- Navbar -->
+<nav class="w-full px-6 py-4 flex justify-between items-center bg-gray-950 shadow-lg fixed top-0 z-40">
+  <a href="#" class="flex items-center space-x-3">
+    <img src="logo.png" alt="ByteWeave Studio Logo" class="h-10 w-10 rounded-full"/>
+    <span class="text-2xl font-bold">ByteWeave Studio</span>
+  </a>
+  <button id="menuBtn" class="px-4 py-2 bg-blue-600 rounded-full btn-animate">Menu</button>
+</nav>
+
+<!-- Menu Popup -->
+<div id="popup" class="menu-popup hidden">
+  <button id="closePopup">&times;</button>
+  <a href="about.html">About Us</a>
+  <a href="#services">Services</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- Hero Section -->
+<section class="min-h-screen flex items-center justify-center flex-col text-center px-4 pt-28" style="background: radial-gradient(circle at top, #1f2937, #111827);">
+  <h1 class="text-4xl md:text-6xl font-extrabold mb-4" data-aos="fade-up">Innovating Web Experiences</h1>
+  <p class="text-gray-300 text-lg max-w-xl" data-aos="fade-up" data-aos-delay="300">
+    At ByteWeave Studio, we craft digital identities through cutting-edge web solutions.
+  </p>
+  <a href="#contact" class="mt-8 px-8 py-3 bg-blue-600 text-white rounded-full btn-animate text-lg" data-aos="fade-up" data-aos-delay="500">Get In Touch</a>
+</section>
+
+<!-- About Us -->
+<section id="about" class="py-20 bg-gray-800 text-center px-4">
+  <h2 class="text-3xl font-bold mb-4" data-aos="fade-up">About Us</h2>
+  <p class="text-gray-300 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+    ByteWeave Studio is a digital innovation hub specializing in web design, development, and branding. Our team of creative minds and tech experts collaborate to turn ideas into digital realities that captivate, convert, and inspire.
+  </p>
+</section>
+
+<!-- Services -->
+<section id="services" class="py-20 bg-gray-900 px-6 text-center">
+  <h2 class="text-3xl font-bold mb-10" data-aos="fade-up">Our Services</h2>
+  <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+    <div class="bg-gray-800 p-6 rounded-xl btn-animate" data-aos="fade-up" data-aos-delay="100">
+      <h3 class="text-xl font-semibold mb-3">Web Development</h3>
+      <p class="text-gray-400">Modern, fast, and responsive websites built with the latest technologies.</p>
+    </div>
+    <div class="bg-gray-800 p-6 rounded-xl btn-animate" data-aos="fade-up" data-aos-delay="200">
+      <h3 class="text-xl font-semibold mb-3">UI/UX Design</h3>
+      <p class="text-gray-400">Elegant interfaces that are intuitive and user-focused.</p>
+    </div>
+    <div class="bg-gray-800 p-6 rounded-xl btn-animate" data-aos="fade-up" data-aos-delay="300">
+      <h3 class="text-xl font-semibold mb-3">Branding</h3>
+      <p class="text-gray-400">Build a brand that stands out with our strategic design process.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="py-20 bg-gray-800 text-center px-4">
+  <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">Contact Us</h2>
+  <p class="text-gray-400 mb-6" data-aos="fade-up" data-aos-delay="200">
+    Ready to launch your next project? We're just a message away.
+  </p>
+  <a href="contact.html" class="px-10 py-3 bg-blue-600 rounded-full text-white text-lg btn-animate" data-aos="fade-up" data-aos-delay="400">Get In Touch</a>
+</section>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init();
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const menuBtn = document.getElementById("menuBtn");
+    const popup = document.getElementById("popup");
+    const closePopup = document.getElementById("closePopup");
+
+    menuBtn.addEventListener("click", () => {
+      popup.classList.remove("hidden");
+      popup.classList.add("flex");
+    });
+
+    closePopup.addEventListener("click", () => {
+      popup.classList.remove("flex");
+      popup.classList.add("hidden");
+    });
+  });
+</script>
+</body>
+</html>
