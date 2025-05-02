@@ -45,14 +45,30 @@
       transform: translateY(-3px) scale(1.05);
       box-shadow: 0 10px 20px rgba(0,0,0,0.3);
     }
+
+    /* Style for contact info in top-left */
+    .contact-info {
+      position: absolute;
+      bottom: 10px;
+      left: 20px;
+      color: white;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+      z-index: 999;
+    }
   </style>
 </head>
 <body class="bg-gray-900 text-white scroll-smooth">
 
+<!-- Contact Info (Top-left) -->
+<div class="contact-info">
+  <p>Email: <a href="mailto:info.byteweavestudio.app@gmail.com" class="text-blue-400">info.byteweavestudio.app@gmail.com</a></p>
+</div>
+
 <!-- Navbar -->
 <nav class="w-full px-6 py-4 flex justify-between items-center bg-gray-950 shadow-lg fixed top-0 z-40">
   <a href="#" class="flex items-center space-x-3">
-    <img src="https://github.com/clayhackergroup/byteweavestudio/blob/main/file_000000007da461f8b4d3f7f918d07704_conversation_id%3D6813855e-aef0-8000-9070-2dcb83a8ed93%26message_id%3D2fd236e8-e35a-419c-9b14-06ef9c5093fd.PNG" alt="ByteWeave Studio Logo" class="h-10 w-10 rounded-full"/>
+    <img src="logo.png" alt="ByteWeave Studio Logo" class="h-10 w-10 rounded-full"/>
     <span class="text-2xl font-bold">ByteWeave Studio</span>
   </a>
   <button id="menuBtn" class="px-4 py-2 bg-blue-600 rounded-full btn-animate">Menu</button>
@@ -110,6 +126,15 @@
   </p>
   <a href="contact.html" class="px-10 py-3 bg-blue-600 rounded-full text-white text-lg btn-animate" data-aos="fade-up" data-aos-delay="400">Get In Touch</a>
 </section>
+
+<!-- Footer -->
+<footer class="bg-gray-950 text-gray-400 text-center py-6 mt-10">
+  <div data-aos="fade-up">
+    <p class="text-xs text-gray-500">
+      ByteWeave Studio © 2025 All rights reserved.
+    </p>
+  </div>
+</footer>
 
 <!-- Scripts -->
 <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
