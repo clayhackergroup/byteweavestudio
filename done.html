@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Thank You - ByteWeave</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #000a1f, #000);
+      color: cyan;
+      font-family: 'Orbitron', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .message-box {
+      text-align: center;
+      padding: 40px;
+      background: rgba(0, 255, 255, 0.05);
+      border: 2px solid rgba(0, 255, 255, 0.2);
+      border-radius: 20px;
+      box-shadow: 0 0 25px cyan;
+      animation: enterFade 1s ease-out forwards;
+    }
+
+    h1 {
+      font-size: 2rem;
+      text-shadow: 0 0 20px cyan;
+      animation: pulse 2s infinite;
+    }
+
+    p {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      animation: fadeInText 2s ease-in-out forwards;
+    }
+
+    .back-btn {
+      margin-top: 30px;
+      padding: 12px 25px;
+      background: linear-gradient(to right, #00ffff, #0077ff);
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 0 20px #00ffff;
+      transition: all 0.4s ease;
+      display: inline-block;
+    }
+
+    .back-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #00ffff;
+    }
+
+    @keyframes enterFade {
+      0% {
+        opacity: 0;
+        transform: scale(0.5) rotate(-10deg);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        text-shadow: 0 0 20px cyan;
+      }
+      50% {
+        text-shadow: 0 0 40px cyan;
+      }
+    }
+
+    @keyframes fadeInText {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="message-box">
+    <h1>Thanks! We’ll contact you soon</h1>
+    <p>Stay updated with ByteWeave Studio</p>
+    <a href="index.html" class="back-btn">Back to Home</a>
+  </div>
+</body>
+</html>
