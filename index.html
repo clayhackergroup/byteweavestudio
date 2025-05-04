@@ -1,161 +1,482 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>  @byteweave_studio  ByteWeave Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ByteWeave Studio</title>
+
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  
+  <!-- AOS (Animate On Scroll) CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
   <style>
-    .menu-popup {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.9);
-      display: none;
-      z-index: 50;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .menu-popup a {
+    /* Global Styles */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
       color: white;
-      font-size: 1.5rem;
-      transition: color 0.3s;
+      overflow-x: hidden;
+      background-color: #000;
     }
 
-    .menu-popup a:hover {
+    /* Universe Background Animation */
+    .universe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #000000 0%, #141414 100%);
+      z-index: -1;
+    }
+
+    /* Star field */
+    .star {
+      position: absolute;
+      background-color: #fff;
+      border-radius: 50%;
+      animation: moveStars 50s linear infinite;
+    }
+
+    /* Keyframes for moving stars */
+    @keyframes moveStars {
+      0% {
+        transform: translateY(0) translateX(0);
+      }
+
+      100% {
+        transform: translateY(100vh) translateX(100vw);
+      }
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: bold;
       color: #3b82f6;
     }
 
-    .menu-popup button {
-      position: absolute;
-      top: 20px;
-      right: 30px;
+    .hero p {
+      font-size: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .hero a {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background-color: #3b82f6;
+      border-radius: 0.5rem;
+      margin-top: 1.5rem;
+      color: white;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .hero a:hover {
+      background-color: #2563eb;
+    }
+
+    /* About Section */
+    #about {
+      padding: 4rem 2rem;
+      background-color: #1e293b;
+    }
+
+    #about h2 {
       font-size: 2rem;
-      color: white;
+      font-weight: 600;
+      color: #93c5fd;
+      margin-bottom: 1rem;
     }
 
-    .btn-animate {
-      transition: all 0.3s ease;
+    #about p {
+      font-size: 1.125rem;
+      line-height: 1.75;
+      color: #d1d5db;
     }
 
-    .btn-animate:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    /* What We Create Section */
+    #create {
+      padding: 4rem 2rem;
+      background: linear-gradient(45deg, #1e293b, #2d3748);
     }
 
-    /* Style for contact info in top-left */
-    .contact-info {
-      position: absolute;
-      bottom: 10px;
-      left: 20px;
-      color: white;
-      font-size: 14px;
-      font-family: Arial, sans-serif;
-      z-index: 999;
+    #create h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #93c5fd;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      color: #d1d5db;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      color: #93c5fd;
+    }
+
+    .card p {
+      font-size: 1rem;
+    }
+
+    /* Types of Web We Build */
+    #types {
+      padding: 4rem 2rem;
+      background-color: #1e293b;
+    }
+
+    #types h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #93c5fd;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .type-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      color: #d1d5db;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .type-card:hover {
+      transform: scale(1.05);
+    }
+
+    .type-card h3 {
+      font-size: 1.5rem;
+      color: #93c5fd;
+    }
+
+    .type-card p {
+      font-size: 1rem;
+    }
+
+    /* Multiuniversal Animations */
+    @keyframes floating {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-20px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .floating {
+      animation: floating 3s ease-in-out infinite;
+    }
+
+    /* Reviews Section */
+    #reviews {
+      padding: 4rem 2rem;
+      background-color: #1e293b;
+    }
+
+    #reviews h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #93c5fd;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .review-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      color: #d1d5db;
+      transition: transform 0.3s ease;
+    }
+
+    .review-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .review-card p {
+      font-size: 1rem;
+    }
+
+    .review-card .author {
+      margin-top: 1rem;
+      font-weight: 600;
+      color: #3b82f6;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero p {
+        font-size: 1.125rem;
+      }
+
+      .card,
+      .type-card,
+      .review-card {
+        padding: 1.5rem;
+      }
+
+      .card h3,
+      .type-card h3 {
+        font-size: 1.125rem;
+      }
+
+      .type-card p,
+      .card p,
+      .review-card p {
+        font-size: 0.875rem;
+      }
+
+      .hero a {
+        padding: 1rem 2rem;
+      }
     }
   </style>
 </head>
-<body class="bg-gray-900 text-white scroll-smooth">
 
-<!-- Contact Info (Top-left) -->
-<div class="contact-info">
-  <p>Email: <a href="mailto:info.byteweavestudio.app@gmail.com" class="text-blue-400">info.byteweavestudio.app@gmail.com</a></p>
-</div>
+<body>
 
-<!-- Navbar -->
-<nav class="w-full px-6 py-4 flex justify-between items-center bg-gray-950 shadow-lg fixed top-0 z-40">
-  <a href="#" class="flex items-center space-x-3">
-    <img src="logo.png" alt="ByteWeave Studio Logo" class="h-10 w-10 rounded-full"/>
-    <span class="text-2xl font-bold">ByteWeave Studio</span>
-  </a>
-  <button id="menuBtn" class="px-4 py-2 bg-blue-600 rounded-full btn-animate">Menu</button>
-</nav>
-
-<!-- Menu Popup -->
-<div id="popup" class="menu-popup hidden">
-  <button id="closePopup">&times;</button>
-  <a href="about.html">About Us</a>
-  <a href="#services">Services</a>
-  <a href="contact.html">Contact</a>
-</div>
-
-<!-- Hero Section -->
-<section class="min-h-screen flex items-center justify-center flex-col text-center px-4 pt-28" style="background: radial-gradient(circle at top, #1f2937, #111827);">
-  <h1 class="text-4xl md:text-6xl font-extrabold mb-4" data-aos="fade-up">Innovating Web Experiences</h1>
-  <p class="text-gray-300 text-lg max-w-xl" data-aos="fade-up" data-aos-delay="300">
-    At ByteWeave Studio, we craft digital identities through cutting-edge web solutions.
-  </p>
-  <a href="#contact" class="mt-8 px-8 py-3 bg-blue-600 text-white rounded-full btn-animate text-lg" data-aos="fade-up" data-aos-delay="500">Get In Touch</a>
-</section>
-
-<!-- About Us -->
-<section id="about" class="py-20 bg-gray-800 text-center px-4">
-  <h2 class="text-3xl font-bold mb-4" data-aos="fade-up">About Us</h2>
-  <p class="text-gray-300 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="200">
-    ByteWeave Studio is a digital innovation hub specializing in web design, development, and branding. Our team of creative minds and tech experts collaborate to turn ideas into digital realities that captivate, convert, and inspire.
-  </p>
-</section>
-
-<!-- Services -->
-<section id="services" class="py-20 bg-gray-900 px-6 text-center">
-  <h2 class="text-3xl font-bold mb-10" data-aos="fade-up">Our Services</h2>
-  <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-    <div class="bg-gray-800 p-6 rounded-xl btn-animate" data-aos="fade-up" data-aos-delay="100">
-      <h3 class="text-xl font-semibold mb-3">Web Development</h3>
-      <p class="text-gray-400">Modern, fast, and responsive websites built with the latest technologies.</p>
-    </div>
-    <div class="bg-gray-800 p-6 rounded-xl btn-animate" data-aos="fade-up" data-aos-delay="200">
-      <h3 class="text-xl font-semibold mb-3">UI/UX Design</h3>
-      <p class="text-gray-400">Elegant interfaces that are intuitive and user-focused.</p>
-    </div>
-    <div class="bg-gray-800 p-6 rounded-xl btn-animate" data-aos="fade-up" data-aos-delay="300">
-      <h3 class="text-xl font-semibold mb-3">Branding</h3>
-      <p class="text-gray-400">Build a brand that stands out with our strategic design process.</p>
-    </div>
+  <!-- Universe Background -->
+  <div class="universe">
+    <!-- Stars animation -->
+    <div class="star" style="top: 5%; left: 10%; width: 5px; height: 5px; animation-duration: 60s;"></div>
+    <div class="star" style="top: 15%; left: 20%; width: 3px; height: 3px; animation-duration: 50s;"></div>
+    <div class="star" style="top: 25%; left: 30%; width: 7px; height: 7px; animation-duration: 40s;"></div>
+    <div class="star" style="top: 35%; left: 50%; width: 4px; height: 4px; animation-duration: 70s;"></div>
+    <div class="star" style="top: 45%; left: 60%; width: 6px; height: 6px; animation-duration: 80s;"></div>
+    <div class="star" style="top: 55%; left: 70%; width: 8px; height: 8px; animation-duration: 30s;"></div>
+    <div class="star" style="top: 65%; left: 80%; width: 5px; height: 5px; animation-duration: 50s;"></div>
+    <div class="star" style="top: 75%; left: 90%; width: 4px; height: 4px; animation-duration: 60s;"></div>
   </div>
+
+  <!-- Hero Section -->
+  <section class="hero" data-aos="fade-up">
+    <div>
+      <h1>ByteWeave Studio</h1>
+      <p>We craft stunning websites with world-class UI/UX and lightning speed.</p>
+      <a href="contact.html">Build a Web</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-20 px-6 bg-slate-800" data-aos="fade-right">
+    <div class="max-w-4xl mx-auto">
+      <h2>About Us</h2>
+      <p>At ByteWeave Studio, we specialize in building fast, responsive, and beautifully animated websites for businesses worldwide. Our team blends creativity with cutting-edge technology to deliver experiences that not only look great but perform exceptionally. Whether it’s a startup portfolio or a full-scale web application, we craft with passion and precision.</p>
+    </div>
+  </section>
+
+  <!-- What We Create Section -->
+  <section id="create" class="py-20" data-aos="zoom-in">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2>What We Create</h2>
+      <div class="flex flex-wrap gap-8 justify-center">
+        <div class="card" data-aos="fade-up">
+          <h3>Websites</h3>
+          <p>Beautiful and responsive websites designed for your business.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="200">
+          <h3>Web Apps</h3>
+          <p>Powerful web applications to meet your business needs.</p>
+        </div>
+        <div class="card" data-aos="fade-up" data-aos-delay="400">
+          <h3>E-commerce</h3>
+          <p>Fully functional e-commerce platforms to take your business online.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Types of Web We Build Section -->
+  <section id="types" class="py-20" data-aos="zoom-in">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2>Types of Websites We Build</h2>
+      <div class="flex flex-wrap gap-8 justify-center">
+        <div class="type-card" data-aos="fade-up">
+          <h3>Business Websites</h3>
+          <p>Websites to elevate your business presence online.</p>
+        </div>
+        <div class="type-card" data-aos="fade-up" data-aos-delay="200">
+          <h3>Portfolio Websites</h3>
+          <p>Showcase your work in a professional manner with a stunning portfolio.</p>
+        </div>
+        <div class="type-card" data-aos="fade-up" data-aos-delay="400">
+          <h3>Blog Websites</h3>
+          <p>Start your blogging journey with an engaging and simple layout.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section id="reviews" class="py-20 px-6 bg-slate-800" data-aos="zoom-in">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2>What Our Clients Say</h2>
+      <div class="flex flex-wrap gap-8 justify-center">
+        <div class="review-card" data-aos="fade-up">
+          <p>"ByteWeave Studio completely transformed our online presence with their exceptional web design skills."</p>
+          <div class="author">cattel</div>
+        </div>
+        <div class="review-card" data-aos="fade-up" data-aos-delay="200">
+          <p>"The website they built for our business is beyond our expectations. Highly recommended!"</p>
+          <div class="author">rahul gaikwad</div>
+        </div>
+        <div class="review-card" data-aos="fade-up" data-aos-delay="400">
+          <p>"An amazing experience! ByteWeave <p>"An amazing experience! ByteWeave Studio delivered a perfect site with seamless functionality."</p>
+<div class="author">prathmesh naik</div>
+</div>
+</div>
+</div>
 </section>
 
-<!-- Contact -->
-<section id="contact" class="py-20 bg-gray-800 text-center px-4">
-  <h2 class="text-3xl font-bold mb-6" data-aos="fade-up">Contact Us</h2>
-  <p class="text-gray-400 mb-6" data-aos="fade-up" data-aos-delay="200">
-    Ready to launch your next project? We're just a message away.
-  </p>
-  <a href="contact.html" class="px-10 py-3 bg-blue-600 rounded-full text-white text-lg btn-animate" data-aos="fade-up" data-aos-delay="400">Get In Touch</a>
-</section>
-
-<!-- Footer -->
-<footer class="bg-gray-950 text-gray-400 text-center py-6 mt-10">
-  <div data-aos="fade-up">
-    <p class="text-xs text-gray-500">
-      ByteWeave Studio © 2025 All rights reserved.
-    </p>
+<!-- Footer Section -->
+<footer class="py-6 bg-slate-900 text-center text-white">
+  <p>&copy; 2025 ByteWeave Studio. All Rights Reserved.</p>
+  <div class="social-links">
+    <a href="#" class="mx-4 text-blue-500 hover:text-blue-700">Facebook</a>
+    <a href="#" class="mx-4 text-blue-400 hover:text-blue-600">Twitter</a>
+    <a href="#" class="mx-4 text-pink-500 hover:text-pink-700">Instagram</a>
+    <a href="#" class="mx-4 text-blue-700 hover:text-blue-900">LinkedIn</a>
   </div>
 </footer>
 
-<!-- Scripts -->
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<!-- AOS (Animate On Scroll) JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  AOS.init();
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const menuBtn = document.getElementById("menuBtn");
-    const popup = document.getElementById("popup");
-    const closePopup = document.getElementById("closePopup");
-
-    menuBtn.addEventListener("click", () => {
-      popup.classList.remove("hidden");
-      popup.classList.add("flex");
-    });
-
-    closePopup.addEventListener("click", () => {
-      popup.classList.remove("flex");
-      popup.classList.add("hidden");
-    });
+  // Initialize AOS (Animate On Scroll)
+  AOS.init({
+    duration: 1000, // Animation duration in milliseconds
+    easing: 'ease-in-out', // Easing effect for animations
+    once: true, // Animation will only run once
   });
+  
+  // Function to create stars in the universe
+  function generateStars(num) {
+    const universe = document.querySelector('.universe');
+    for (let i = 0; i < num; i++) {
+      const star = document.createElement('div');
+      const size = Math.random() * 3 + 1;
+      const positionX = Math.random() * 100;
+      const positionY = Math.random() * 100;
+      
+      star.classList.add('star');
+      star.style.width = `${size}px`;
+      star.style.height = `${size}px`;
+      star.style.top = `${positionY}%`;
+      star.style.left = `${positionX}%`;
+      <!-- Navigation Menu Bar -->
+  <nav class="bg-black text-white py-4">
+    <div class="max-w-6xl mx-auto flex justify-between items-center px-6">
+      <a href="#" class="text-2xl font-semibold">ByteWeave Studio</a>
+      <div class="hidden md:flex space-x-6">
+        <a href="#about" class="hover:text-gray-300">About</a>
+        <a href="#create" class="hover:text-gray-300">What We Create</a>
+        <a href="#types" class="hover:text-gray-300">Types of Web</a>
+        <a href="#reviews" class="hover:text-gray-300">Reviews</a>
+      </div>
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button id="menuToggle" class="text-2xl">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation Menu -->
+  <div id="mobileMenu" class="md:hidden hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div class="flex justify-end p-4">
+      <button id="closeMenu" class="text-3xl text-white">&times;</button>
+    </div>
+    <div class="flex justify-center items-center h-full">
+      <div class="space-y-6 text-center text-white">
+        <a href="#about" class="block text-xl">About</a>
+        <a href="#create" class="block text-xl">What We Create</a>
+        <a href="#types" class="block text-xl">Types of Web</a>
+        <a href="#reviews" class="block text-xl">Reviews</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer class="py-6 bg-slate-900 text-center text-white">
+    <p>&copy; 2025 ByteWeave Studio. All Rights Reserved.</p>
+    <div class="social-links">
+      <a href="#" class="mx-4 text-blue-500 hover:text-blue-700">Facebook</a>
+      <a href="#" class="mx-4 text-blue-400 hover:text-blue-600">Twitter</a>
+      <a href="https://www.instagram.com/byteweave_studio" class="mx-4 text-pink-500 hover:text-pink-700">Instagram</a>
+      <a href="#" class="mx-4 text-blue-700 hover:text-blue-900">LinkedIn</a>
+    </div>
+  </footer>
+
+  <!-- AOS (Animate On Scroll) JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS (Animate On Scroll)
+    AOS.init({
+      duration: 1000, // Animation duration in milliseconds
+      easing: 'ease-in-out', // Easing effect for animations
+      once: true, // Whether animation should only happen once
+    });
+
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const closeMenu = document.getElementById('closeMenu');
+
+    menuToggle.addEventListener('click', () => {
+      mobileMenu.classList.remove('hidden');
+    });
+
+    closeMenu.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+    });
+  </script>
+</body>
+</html>
+      
 </script>
-  </body>
+</body>
+
 </html>
