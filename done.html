@@ -1,116 +1,137 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Thank You - ByteWeave</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thank You - Byteweave Studio</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
 
     body {
-      background: radial-gradient(circle at center, #000a1f, #000);
-      color: cyan;
-      font-family: 'Orbitron', sans-serif;
+      margin: 0;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #2c5364);
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
       overflow: hidden;
     }
 
-    .message-box {
-      text-align: center;
-      padding: 40px;
-      background: rgba(0, 255, 255, 0.05);
-      border: 2px solid rgba(0, 255, 255, 0.2);
+    .container {
+      background: rgba(255, 255, 255, 0.12);
       border-radius: 20px;
-      box-shadow: 0 0 25px cyan;
-      animation: enterFade 1s ease-out forwards;
+      padding: 40px 30px;
+      max-width: 400px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(8px);
+      animation: fadeInScale 1s cubic-bezier(.68,-0.55,.27,1.55);
+      position: relative;
+    }
+
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.6) translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
     }
 
     h1 {
-      font-size: 2rem;
-      text-shadow: 0 0 20px cyan;
-      animation: pulse 2s infinite;
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px #00c6ff;
     }
 
     p {
-      margin-top: 10px;
-      font-size: 1.1rem;
-      animation: fadeInText 2s ease-in-out forwards;
+      font-size: 1.15rem;
+      margin-bottom: 30px;
+      color: #d1eaff;
+      line-height: 1.5;
     }
 
-    .back-btn {
-      margin-top: 30px;
-      padding: 12px 25px;
-      background: linear-gradient(to right, #00ffff, #0077ff);
+    button {
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
       border: none;
       border-radius: 10px;
-      font-size: 1rem;
-      color: #000;
-      font-weight: bold;
-      text-decoration: none;
-      box-shadow: 0 0 20px #00ffff;
-      transition: all 0.4s ease;
-      display: inline-block;
+      padding: 15px 30px;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0, 198, 255, 0.4);
+      transition: background 0.3s ease, transform 0.2s ease;
+      letter-spacing: 1.2px;
     }
 
-    .back-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px #00ffff;
+    button:hover {
+      background: linear-gradient(90deg, #0072ff, #00c6ff);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 30px rgba(0, 198, 255, 0.6);
     }
 
-    @keyframes enterFade {
+    /* Subtle glowing border animation */
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      right: -6px;
+      bottom: -6px;
+      border-radius: 26px;
+      background: linear-gradient(270deg, #00c6ff, #0072ff, #00c6ff);
+      background-size: 600% 600%;
+      animation: glowing 8s ease infinite;
+      z-index: -1;
+      filter: blur(12px);
+      opacity: 0.7;
+    }
+
+    @keyframes glowing {
       0% {
-        opacity: 0;
-        transform: scale(0.5) rotate(-10deg);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) rotate(0);
-      }
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        text-shadow: 0 0 20px cyan;
+        background-position: 0% 50%;
       }
       50% {
-        text-shadow: 0 0 40px cyan;
-      }
-    }
-
-    @keyframes fadeInText {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
+        background-position: 100% 50%;
       }
       100% {
-        opacity: 1;
-        transform: translateY(0);
+        background-position: 0% 50%;
       }
     }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.5rem;
+    @media (max-width: 480px) {
+      .container {
+        width: 90%;
+        padding: 30px 20px;
       }
-      p {
-        font-size: 1rem;
+      h1 {
+        font-size: 2rem;
+      }
+      button {
+        width: 100%;
+        padding: 14px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="message-box">
-    <h1>Thanks! We’ll contact you soon</h1>
-    <p>Stay updated with ByteWeave Studio</p>
-    <a href="index.html" class="back-btn">Back to Home</a>
+  <div class="container" role="main" aria-labelledby="thankYouTitle">
+    <h1 id="thankYouTitle">Thank You!</h1>
+    <p>Thanks for messaging us. We will contact you soon.</p>
+    <button onclick="goHome()" aria-label="Back to Home Page">Back to Home</button>
   </div>
+
+  <script>
+    function goHome() {
+      window.location.href = 'index.html'; // Change this if your home page URL is different
+    }
+  </script>
 </body>
 </html>
