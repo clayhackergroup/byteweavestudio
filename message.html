@@ -1,160 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ByteWeave Message</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Message Byteweave Studio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif;
-      background: linear-gradient(135deg, #0a0a23, #1b1b2f);
-      color: #fff;
+      background: linear-gradient(135deg, #0f2027, #2c5364);
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      overflow: hidden;
-      padding: 20px;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
     }
-
     .form-container {
-      background: rgba(0, 255, 255, 0.05);
-      padding: 30px;
+      background: rgba(255,255,255,0.12);
       border-radius: 20px;
-      border: 2px solid rgba(0,255,255,0.3);
-      box-shadow: 0 0 30px cyan;
-      width: 100%;
-      max-width: 500px;
-      animation: pulse 3s infinite;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+      backdrop-filter: blur(6px);
+      padding: 40px 30px;
+      width: 350px;
+      animation: popin 1s cubic-bezier(.68,-0.55,.27,1.55);
     }
-
-    h2 {
+    @keyframes popin {
+      0% { transform: scale(0.7) rotate(-10deg); opacity: 0; }
+      100% { transform: scale(1) rotate(0); opacity: 1; }
+    }
+    .form-container h2 {
+      color: #fff;
+      letter-spacing: 2px;
+      margin-bottom: 25px;
       text-align: center;
-      color: cyan;
-      margin-bottom: 20px;
-      text-shadow: 0 0 15px cyan;
+      animation: fadeInDown 1s;
     }
-
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-30px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    label {
+      color: #eee;
+      font-size: 1rem;
+      margin-bottom: 6px;
+      display: block;
+      letter-spacing: 1px;
+    }
     input, textarea {
       width: 100%;
-      padding: 15px;
-      margin-bottom: 15px;
+      padding: 12px;
+      margin-bottom: 18px;
       border: none;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.1);
-      color: #fff;
-      font-size: 16px;
-      box-shadow: 0 0 8px cyan;
-      transition: all 0.3s ease;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.18);
+      color: #222;
+      font-size: 1rem;
+      transition: box-shadow 0.3s;
+      box-shadow: 0 2px 8px rgba(44,83,100,0.07);
+      outline: none;
     }
-
     input:focus, textarea:focus {
-      box-shadow: 0 0 15px #0ff, 0 0 25px #0ff;
-      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 0 0 2px #00c6ff;
+      background: #fff;
     }
-
-    textarea {
-      height: 120px;
-      resize: none;
-    }
-
     button {
       width: 100%;
-      padding: 15px;
-      background: linear-gradient(to right, #00ffff, #00aaff);
-      color: #000;
-      font-size: 1rem;
-      font-weight: bold;
+      padding: 14px;
+      background: linear-gradient(90deg, #00c6ff, #0072ff);
+      color: #fff;
       border: none;
-      border-radius: 12px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      letter-spacing: 1px;
       cursor: pointer;
-      transition: all 0.4s ease;
-      box-shadow: 0 0 20px cyan;
+      box-shadow: 0 4px 14px rgba(0,198,255,0.2);
+      transition: background 0.2s, transform 0.2s;
+      animation: pulse 2s infinite;
     }
-
     button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 30px #0ff;
+      background: linear-gradient(90deg, #0072ff, #00c6ff);
+      transform: translateY(-2px) scale(1.03);
     }
-
     @keyframes pulse {
-      0%, 100% {
-        box-shadow: 0 0 30px cyan;
-      }
-      50% {
-        box-shadow: 0 0 60px #00ffff;
-      }
+      0%,100% { box-shadow: 0 0 0 0 rgba(0,198,255,0.4);}
+      50% { box-shadow: 0 0 20px 8px rgba(0,198,255,0.14);}
     }
-
-    @media (max-width: 600px) {
-      .form-container {
-        padding: 20px;
-      }
+    .form-container::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; right: 0; bottom: 0;
+      border-radius: 20px;
+      z-index: -1;
+      background: linear-gradient(120deg, #00c6ff50 0%, #0072ff30 100%);
+      opacity: 0.5;
+      filter: blur(12px);
+      animation: neonGlow 3s infinite alternate;
+    }
+    @keyframes neonGlow {
+      0% { opacity: 0.5; }
+      100% { opacity: 0.9; }
     }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>Message ByteWeave</h2>
-    <form id="contactForm">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <input type="text" name="number" placeholder="Your Number (optional)" />
-      <input type="text" name="subject" placeholder="Subject" required />
-      <textarea name="message" placeholder="Describe your web idea..." required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-  </div>
-
+  <form class="form-container" id="contactForm" autocomplete="off">
+    <h2>Message Byteweave Studio</h2>
+    <label for="name">Name</label>
+    <input required type="text" id="name" name="name" placeholder="Your name">
+    <label for="email">Email</label>
+    <input required type="email" id="email" name="email" placeholder="you@email.com">
+    <label for="message">Message</label>
+    <textarea required id="message" name="message" placeholder="Type your message..." rows="5"></textarea>
+    <button type="submit">Send Message</button>
+  </form>
   <script>
-    document.getElementById("contactForm").addEventListener("submit", function (e) {
+    // Replace with your Telegram Bot Token and Chat ID
+    const TELEGRAM_BOT_TOKEN = '8110042599:AAFcTlqE7U7Sfi0iKcNNPTnejxO7O_-xGAE';
+    const TELEGRAM_CHAT_ID = '8043446963';
+
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
       e.preventDefault();
 
-      const name = this.name.value.trim();
-      const email = this.email.value.trim();
-      const number = this.number.value.trim();
-      const subject = this.subject.value.trim();
-      const message = this.message.value.trim();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
 
-      const text = `
-New Contact from ByteWeave:
-Name: ${name}
-Email: ${email}
-Number: ${number}
-Subject: ${subject}
-Message: ${message}
-      `;
+      // Compose message in Markdown
+      const telegramMessage = 
+        `*New Message from Byteweave Studio*\n` +
+        `*Name:* ${name}\n` +
+        `*Email:* ${email}\n` +
+        `*Message:*\n${message}`;
 
-      const token = "8110042599:AAFcTlqE7U7Sfi0iKcNNPTnejxO7O_-xGAE";
-      const chatId = "8043446963";
+      // Send to Telegram
+      try {
+        await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: telegramMessage,
+            parse_mode: 'Markdown'
+          })
+        });
 
-      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: text
-        })
-      })
-      .then(response => {
-        if (response.ok) {
-          window.location.href = "done.html";
-        } else {
-          alert("Failed to send. Try again.");
-        }
-      })
-      .catch(error => {
-        alert("Error sending message.");
-        console.error(error);
-      });
+        // Redirect on success
+        window.location.href = 'done.html';
+      } catch (err) {
+        alert('Failed to send message. Please try again.');
+      }
     });
   </script>
 </body>
