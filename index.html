@@ -1,1194 +1,932 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Byteweave Studio India</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap');
-
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Montserrat', Arial, sans-serif;
-      background: #0a0a23;
-      color: #f3f3f3;
-      overflow-x: hidden;
-    }
-
-    header {
-      width: 100%;
-      padding: 32px 0 24px 0;
-      background: transparent;
-      position: absolute;
-      z-index: 10;
-    }
+  <head>
+    <title>Tasty - Free Bootstrap 4 Template by byteweave studio</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
-    .animate-on-scroll {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.7s cubic-bezier(.68, -0.55, .27, 1.55), transform 0.7s cubic-bezier(.68, -0.55, .27, 1.55);
-  will-change: opacity, transform;
-}
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
 
-.animate-on-scroll.in-view {
-  opacity: 1;
-  transform: none;
-}
+    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
 
-    nav {
-      width: 90%;
-      margin: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-    }
+    <link rel="stylesheet" href="css/aos.css">
 
-    .logo {
-      font-size: 2.2rem;
-      font-weight: bold;
-      letter-spacing: 2px;
-      background: linear-gradient(90deg,#00ffe7,#2e6fff,#ff00e0,#ffeb3b);
-      background-size: 200% 200%;
-      color: transparent;
-      -webkit-background-clip: text;
-      background-clip: text;
-      animation: gradientMove 3s linear infinite;
-      z-index: 101;
-    }
+    <link rel="stylesheet" href="css/ionicons.min.css">
 
-    @keyframes gradientMove {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.css">
 
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 36px;
-      margin: 0;
-      padding: 0;
-      align-items: center;
-      transition: all 0.3s;
-      z-index: 100;
-    }
+    
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Tasty</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="oi oi-menu"></span> Menu
+        </button>
 
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 1.1rem;
-      position: relative;
-      padding: 4px 0;
-      transition: color 0.3s;
-    }
-
-    nav ul li a:after {
-      content: '';
-      position: absolute;
-      left: 0; bottom: 0;
-      width: 100%; height: 2px;
-      background: linear-gradient(90deg, #00ffe7, #ff00e0);
-      transform: scaleX(0);
-      transition: transform 0.3s;
-      transform-origin: right;
-    }
-
-    nav ul li a:hover {
-      color: #00ffe7;
-    }
-    nav ul li a:hover:after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-
-    .hamburger {
-      display: none;
-      font-size: 2rem;
-      color: #fff;
-      cursor: pointer;
-      user-select: none;
-      z-index: 102;
-      background: none;
-      border: none;
-      outline: none;
-      margin-left: 20px;
-    }
-
-    /* Hero Section */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
-      overflow: hidden;
-      text-align: center;
-      padding-top: 0;
-    }
-    /* Particle background */
-    #particles-js {
-      position: absolute;
-      width: 100vw;
-      height: 100vh;
-      top: 0; left: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .hero-title {
-      font-size: 3.2rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-      letter-spacing: 1.5px;
-      background: linear-gradient(90deg,#00ffe7,#2e6fff,#ff00e0,#ffeb3b);
-      background-size: 200% 200%;
-      color: transparent;
-      -webkit-background-clip: text;
-      background-clip: text;
-      animation: gradientMove 3s linear infinite;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeInUp 1.2s 0.2s forwards, gradientMove 3s linear infinite;
-    }
-
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .hero-desc {
-      font-size: 1.35rem;
-      color: #d8d8f6;
-      margin-bottom: 40px;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeInUp 1.2s 0.5s forwards;
-    }
-
-    .cta-btn {
-      padding: 16px 48px;
-      font-size: 1.2rem;
-      font-weight: bold;
-      background: linear-gradient(90deg,#00ffe7,#ff00e0);
-      color: #181818;
-      border: none;
-      border-radius: 32px;
-      cursor: pointer;
-      box-shadow: 0 8px 32px rgba(0,255,231,0.15);
-      transition: background 0.3s, transform 0.2s;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: fadeInUp 1.2s 0.8s forwards;
-    }
-    .cta-btn:hover {
-      background: linear-gradient(90deg,#ffeb3b,#ff00e0);
-      transform: scale(1.07);
-      color: #0a0a23;
-    }
-
-    /* Services Section */
-    #services {
-      background: #13132b;
-      padding: 80px 0 60px 0;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-    #services h2 {
-      font-size: 2.2rem;
-      margin-bottom: 40px;
-      color: #00ffe7;
-      letter-spacing: 1px;
-    }
-    .services-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 36px;
-    }
-    .service-card {
-      background: rgba(15,15,40,0.92);
-      border-radius: 18px;
-      padding: 36px 28px;
-      width: 280px;
-      box-shadow: 0 4px 32px rgba(0,255,231,0.08);
-      border: 2px solid transparent;
-      transition: transform 0.4s cubic-bezier(.68,-0.55,.27,1.55), border 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .service-card:before {
-      content: '';
-      position: absolute;
-      top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background: conic-gradient(from 180deg at 50% 50%, #00ffe7, #2e6fff, #ff00e0, #ffeb3b, #00ffe7);
-      animation: rotateBorder 4s linear infinite;
-      z-index: 0;
-      opacity: 0.6;
-    }
-    @keyframes rotateBorder {
-      0% { transform: rotate(0deg);}
-      100% { transform: rotate(360deg);}
-    }
-    .service-card:hover {
-      transform: scale(1.06) rotate(-2deg);
-      border: 2px solid #ff00e0;
-    }
-    .service-card h3 {
-      color: #ff00e0;
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 1;
-    }
-    .service-card p {
-      color: #e3e3f3;
-      position: relative;
-      z-index: 1;
-    }
-    .service-card:after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: #181828;
-      border-radius: 16px;
-      z-index: 0;
-      opacity: 0.85;
-    }
-
-    /* Unique Selling Points Section */
-    #unique-selling-points {
-      background:#0f0f28;
-      padding:60px 20px;
-      text-align:center;
-      color:#d8d8f6;
-    }
-    #unique-selling-points h2 {
-      color:#00ffe7;
-      margin-bottom:30px;
-      font-size:2rem;
-      letter-spacing:1px;
-    }
-    #unique-selling-points ul {
-      max-width: 900px;
-      margin: auto;
-      text-align: left;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      list-style: none;
-      padding: 0;
-    }
-    #unique-selling-points li {
-      margin-bottom: 16px;
-    }
-
-    /* FAQ Section */
-    #faq {
-      background:#13132b;
-      padding:60px 20px;
-      color:#d8d8f6;
-      max-width:900px;
-      margin: 40px auto;
-      border-radius: 16px;
-    }
-    #faq h2 {
-      color:#00ffe7;
-      margin-bottom:30px;
-      text-align:center;
-      font-size:2rem;
-      letter-spacing:1px;
-    }
-    #faq details {
-      margin-bottom: 16px;
-      background: rgba(15,15,40,0.8);
-      padding: 14px 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 1.05rem;
-      line-height: 1.5;
-      border: 1.5px solid #23234a;
-      transition: border 0.3s;
-    }
-    #faq details[open] {
-      border: 1.5px solid #ff00e0;
-    }
-    #faq summary {
-      font-weight: 600;
-      color: #ff00e0;
-      outline: none;
-    }
-    #faq p {
-      margin-top:8px;
-      color:#e3e3f3;
-    }
-
-    /* Client Reviews Section */
-    #client-reviews {
-      background: #181828;
-      padding: 64px 0 46px 0;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-    #client-reviews h2 {
-      color: #00ffe7;
-      font-size: 2rem;
-      margin-bottom: 38px;
-      letter-spacing: 1px;
-    }
-    .testimonial-slider {
-      max-width: 420px;
-      margin: 0 auto;
-      position: relative;
-    }
-    .testimonial {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      background: rgba(15,15,40,0.93);
-      border-radius: 18px;
-      padding: 38px 24px 30px 24px;
-      box-shadow: 0 4px 32px rgba(0,255,231,0.08);
-      border: 2px solid transparent;
-      min-height: 320px;
-      transition: border 0.3s, box-shadow 0.3s;
-      animation: fadeInUpReview 0.6s;
-    }
-    .testimonial.active {
-      display: flex;
-      border: 2px solid #ff00e0;
-      animation: fadeInUpReview 0.6s;
-    }
-    @keyframes fadeInUpReview {
-      0% { opacity: 0; transform: translateY(40px);}
-      100% { opacity: 1; transform: translateY(0);}
-    }
-    .testimonial img {
-      width: 84px;
-      height: 84px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid #00ffe7;
-      margin-bottom: 18px;
-      box-shadow: 0 2px 18px rgba(0,255,231,0.10);
-      transition: border 0.3s;
-      background: #23234a;
-    }
-    .testimonial-content p {
-      color: #e3e3f3;
-      font-size: 1.13rem;
-      margin-bottom: 18px;
-      min-height: 60px;
-      font-style: italic;
-    }
-    .client-name {
-      font-weight: bold;
-      color: #ff00e0;
-      display: block;
-      margin-bottom: 2px;
-    }
-    .client-meta {
-      color: #ffeb3b;
-      font-size: 0.98rem;
-    }
-    .testimonial-nav {
-      margin-top: 18px;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-    }
-    .testimonial-nav .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #2e6fff;
-      opacity: 0.5;
-      cursor: pointer;
-      transition: background 0.2s, opacity 0.2s;
-      display: inline-block;
-    }
-    .testimonial-nav .dot.active {
-      background: #ff00e0;
-      opacity: 1;
-      border: 2px solid #ffeb3b;
-    }
-    @media (max-width: 600px) {
-      #client-reviews {
-        padding: 32px 0 24px 0;
-      }
-      .testimonial-slider {
-        max-width: 98vw;
-      }
-      .testimonial {
-        padding: 22px 8px 18px 8px;
-        min-height: 240px;
-      }
-      .testimonial img {
-        width: 62px;
-        height: 62px;
-      }
-    }
-
-    /* Programmer Animation Section */
-    #programmer-animation {
-      background: #13132b;
-      padding: 56px 0 32px 0;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-    .programmer-container {
-      position: relative;
-      width: 280px;
-      height: 220px;
-      margin: 0 auto;
-    }
-    .desk {
-      position: absolute;
-      bottom: 34px;
-      left: 30px;
-      width: 220px;
-      height: 18px;
-      background: #23234a;
-      border-radius: 8px 8px 12px 12px;
-      box-shadow: 0 2px 12px #0003;
-      z-index: 1;
-    }
-    .monitor {
-      position: absolute;
-      left: 100px;
-      top: 35px;
-      width: 72px;
-      height: 48px;
-      z-index: 3;
-    }
-    .screen {
-      width: 72px;
-      height: 40px;
-      background: #222d3d;
-      border-radius: 6px 6px 8px 8px;
-      border: 2.5px solid #00ffe7;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 2px 8px #00ffe733;
-    }
-    .stand {
-      width: 14px;
-      height: 10px;
-      background: #2e6fff;
-      border-radius: 0 0 7px 7px;
-      position: absolute;
-      left: 29px;
-      top: 40px;
-    }
-    .code-line {
-      height: 6px;
-      border-radius: 3px;
-      margin: 5px 0 0 8px;
-      background: linear-gradient(90deg,#00ffe7,#ff00e0);
-      opacity: 0.85;
-      width: 0;
-      animation: typing 1.6s infinite;
-    }
-    .code-line.line1 {animation-delay: 0s; width: 48px;}
-    .code-line.line2 {animation-delay: 0.3s; width: 36px;}
-    .code-line.line3 {animation-delay: 0.6s; width: 54px;}
-    .code-line.line4 {animation-delay: 0.9s; width: 28px;}
-    @keyframes typing {
-      0% { width: 0; opacity: 0.7;}
-      40% { width: 100%; opacity: 1;}
-      100% { width: 0; opacity: 0.7;}
-    }
-    .person {
-      position: absolute;
-      left: 70px;
-      top: 65px;
-      z-index: 4;
-    }
-    .head {
-      width: 28px;
-      height: 28px;
-      background: #ffeb3b;
-      border-radius: 50%;
-      border: 2px solid #ff00e0;
-      position: absolute;
-      left: 22px;
-      top: -26px;
-      z-index: 5;
-      box-shadow: 0 2px 8px #ff00e022;
-    }
-    .body {
-      width: 24px;
-      height: 40px;
-      background: #2e6fff;
-      border-radius: 12px 12px 16px 16px;
-      position: absolute;
-      left: 24px;
-      top: 2px;
-    }
-    .arm.left, .arm.right {
-      width: 12px;
-      height: 34px;
-      background: #00ffe7;
-      border-radius: 8px;
-      position: absolute;
-      top: 10px;
-      z-index: 4;
-      transform-origin: top center;
-    }
-    .arm.left {
-      left: 7px;
-      transform: rotate(-28deg);
-      animation: arm-left-move 2.2s infinite;
-    }
-    .arm.right {
-      left: 49px;
-      transform: rotate(28deg);
-      animation: arm-right-move 2.2s infinite;
-    }
-    @keyframes arm-left-move {
-      0%,100% { transform: rotate(-28deg);}
-      50% { transform: rotate(-15deg);}
-    }
-    @keyframes arm-right-move {
-      0%,100% { transform: rotate(28deg);}
-      50% { transform: rotate(15deg);}
-    }
-    .hand.left, .hand.right {
-      width: 10px;
-      height: 10px;
-      background: #ff00e0;
-      border-radius: 50%;
-      position: absolute;
-      top: 38px;
-      z-index: 5;
-    }
-    .hand.left { left: 2px;}
-    .hand.right { left: 54px;}
-    .leg.left, .leg.right {
-      width: 13px;
-      height: 38px;
-      background: #23234a;
-      border-radius: 8px;
-      position: absolute;
-      top: 40px;
-      z-index: 3;
-    }
-    .leg.left { left: 19px; transform: rotate(-10deg);}
-    .leg.right { left: 38px; transform: rotate(10deg);}
-    .keyboard {
-      position: absolute;
-      left: 110px;
-      top: 88px;
-      width: 44px;
-      height: 10px;
-      background: #ff00e0;
-      border-radius: 3px;
-      box-shadow: 0 1px 4px #ff00e033;
-      z-index: 4;
-      animation: keyboard-glow 2.2s infinite;
-    }
-    @keyframes keyboard-glow {
-      0%,100% { box-shadow: 0 1px 4px #ff00e033;}
-      50% { box-shadow: 0 2px 12px #ff00e099;}
-    }
-    .chair {
-      position: absolute;
-      left: 65px;
-      top: 110px;
-      width: 70px;
-      height: 60px;
-      background: #181828;
-      border-radius: 18px 18px 28px 28px;
-      box-shadow: 0 2px 12px #0005;
-      z-index: 0;
-    }
-    .programmer-caption {
-      font-size: 1.1rem;
-      color: #00ffe7;
-      margin-top: 30px;
-      letter-spacing: 0.5px;
-    }
-    @media (max-width: 600px) {
-      .programmer-container {
-        width: 98vw;
-        max-width: 260px;
-        height: 170px;
-      }
-      .programmer-caption {
-        font-size: 1rem;
-        margin-top: 18px;
-      }
-      #programmer-animation {
-        padding: 32px 0 18px 0;
-      }
-    }
-
-    /* Contact Info Section */
-    #contact-info {
-      background: #181828;
-      padding: 48px 0 32px 0;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
-    #contact-info h2 {
-      color: #ff00e0;
-      font-size: 1.7rem;
-      margin-bottom: 28px;
-      letter-spacing: 1px;
-    }
-    .contact-methods {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 40px;
-    }
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-size: 1.13rem;
-      color: #e3e3f3;
-      background: rgba(15,15,40,0.92);
-      border-radius: 14px;
-      padding: 16px 24px;
-      margin-bottom: 10px;
-      box-shadow: 0 2px 16px rgba(0,255,231,0.07);
-      border: 1.5px solid #23234a;
-      transition: border 0.3s, box-shadow 0.3s;
-    }
-    .contact-item:hover {
-      border: 1.5px solid #ff00e0;
-      box-shadow: 0 4px 24px rgba(255,0,224,0.11);
-      color: #ff00e0;
-    }
-    .contact-link {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.2s;
-      word-break: break-all;
-    }
-    .contact-link:hover {
-      color: #00ffe7;
-      text-decoration: underline;
-    }
-
-    /* CSS Icons */
-    .icon {
-      display: inline-block;
-      width: 32px;
-      height: 32px;
-      vertical-align: middle;
-    }
-    /* Email Icon */
-    .icon-mail {
-      position: relative;
-      width: 32px; height: 32px;
-    }
-    .icon-mail .envelope {
-      position: absolute;
-      left: 3px; top: 8px;
-      width: 26px; height: 16px;
-      border: 2.5px solid #00ffe7;
-      border-radius: 4px;
-      background: transparent;
-    }
-    .icon-mail .flap {
-      position: absolute;
-      left: 3px; top: 8px;
-      width: 26px; height: 16px;
-      border-bottom: 2.5px solid #ff00e0;
-      background: transparent;
-      clip-path: polygon(0 0, 50% 60%, 100% 0, 100% 0, 0 0);
-    }
-    /* Phone Icon */
-    .icon-phone {
-      position: relative;
-      width: 32px; height: 32px;
-    }
-    .icon-phone .phone-body {
-      position: absolute;
-      left: 8px; top: 4px;
-      width: 16px; height: 24px;
-      border-radius: 8px 8px 16px 16px/8px 8px 16px 16px;
-      border: 2.5px solid #2e6fff;
-      border-bottom-width: 4px;
-      background: transparent;
-      transform: rotate(-10deg);
-    }
-    .icon-phone .phone-dot {
-      position: absolute;
-      left: 16px; top: 24px;
-      width: 4px; height: 4px;
-      background: #ffeb3b;
-      border-radius: 50%;
-    }
-    /* Instagram Icon */
-    .icon-instagram {
-      position: relative;
-      width: 32px; height: 32px;
-    }
-    .icon-instagram .insta-bg {
-      position: absolute;
-      left: 3px; top: 3px;
-      width: 26px; height: 26px;
-      border-radius: 7px;
-      border: 2.5px solid #ff00e0;
-      background: transparent;
-    }
-    .icon-instagram .insta-circle {
-      position: absolute;
-      left: 11px; top: 11px;
-      width: 10px; height: 10px;
-      border-radius: 50%;
-      border: 2px solid #00ffe7;
-      background: transparent;
-    }
-    .icon-instagram .insta-dot {
-      position: absolute;
-      left: 21px; top: 7px;
-      width: 3.5px; height: 3.5px;
-      border-radius: 50%;
-      background: #ffeb3b;
-    }
-
-    /* Footer */
-    footer {
-      background: #13132b;
-      text-align: center;
-      padding: 22px 0;
-      color: #ccc;
-      font-size: 1rem;
-      letter-spacing: 1px;
-    }
-
-    /* Responsive styles */
-    @media (max-width: 1100px) {
-      nav {
-        width: 97%;
-      }
-    }
-    @media (max-width: 900px) {
-      .services-container {
-        flex-direction: column;
-        align-items: center;
-      }
-      .service-card {
-        width: 92vw;
-        max-width: 350px;
-        margin-bottom: 24px;
-      }
-      .contact-methods {
-        flex-direction: column;
-        gap: 18px;
-      }
-    }
-    @media (max-width: 700px) {
-      nav ul {
-        display: none;
-        flex-direction: column;
-        gap: 0;
-        background: #181828;
-        position: absolute;
-        right: 0;
-        top: 60px;
-        width: 70vw;
-        border-radius: 0 0 16px 16px;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.22);
-        z-index: 100;
-      }
-      nav ul.active {
-        display: flex;
-      }
-      .hamburger {
-        display: block;
-      }
-      .logo {
-        font-size: 1.3rem;
-      }
-      header {
-        padding: 18px 0 12px 0;
-      }
-    }
-    @media (max-width: 600px) {
-      .hero-title { font-size: 1.5rem;}
-      .hero-desc { font-size: 1rem;}
-      #hero { padding-top: 80px;}
-      .cta-btn { padding: 12px 24px; font-size: 1rem; }
-      section {
-        padding-left: 8px !important;
-        padding-right: 8px !important;
-      }
-      #services, #contact-info, #client-reviews, #unique-selling-points, #faq {
-        padding: 40px 0 30px 0;
-      }
-      .contact-item {
-        font-size: 1rem;
-        padding: 12px 10px;
-      }
-      .icon {
-        width: 26px;
-        height: 26px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <nav>
-      <div class="logo">Byteweave Studio India</div>
-      <button class="hamburger" id="hamburger" aria-label="Open navigation menu">&#9776;</button>
-      <ul>
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#unique-selling-points">Why Us</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#client-reviews">Reviews</a></li>
-        <li><a href="#contact-info">Contact</a></li>
-        <li><a href="message.html">Message Us</a></li>
-      </ul>
+        <div class="collapse navbar-collapse" id="ftco-nav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="menu.html" class="nav-link">Menu</a></li>
+            <li class="nav-item"><a href="specialties.html" class="nav-link">Specialties</a></li>
+            <li class="nav-item"><a href="reservation.html" class="nav-link">Reservation</a></li>
+            <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
-  </header>
-  <div id="particles-js"></div>
-  <section id="hero">
-    <h1 class="hero-title">Weave Your Digital Dreams<br>with <span style="color:#00ffe7;">Byteweave Studio India</span></h1>
-    <p class="hero-desc">Next-gen web development, branding, and digital transformation.<br>
-      Crafted in India. Delivered worldwide.</p>
-    <button class="cta-btn" id="servicesScroll">Explore Services</button>
-  </section>
-  <section id="services" class="animate-on-scroll">
-    <h2>Our Expertise</h2>
-    <div class="services-container">
-      <div class="service-card">
-        <h3>Custom Web Development</h3>
-        <p>Modern, scalable, and blazing-fast websites & apps tailored to your brand.</p>
+    <!-- END nav -->
+    
+    <section class="home-slider owl-carousel">
+      <div class="slider-item" style="background-image: url('images/bg_1.jpg');">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text align-items-center justify-content-center text-center">
+            <div class="col-md-10 col-sm-12 ftco-animate">
+              <h1 class="mb-3">Book a table for yourself at a time convenient for you</h1>
+              <p><a href="reservation.html" class="btn btn-primary btn-outline-white px-5 py-3">Book a table</a></p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="service-card">
-        <h3>UI/UX & Branding</h3>
-        <p>Stunning interfaces and memorable digital identities that stand out.</p>
+
+      <div class="slider-item" style="background-image: url('images/bg_2.jpg');">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text align-items-center justify-content-center text-center">
+            <div class="col-md-10 col-sm-12 ftco-animate">
+              <h1 class="mb-3">Tasty &amp; Delicious Food</h1>
+              <p><a href="reservation.html" class="btn btn-primary btn-outline-white px-5 py-3">Book a table</a></p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="service-card">
-        <h3>eCommerce Solutions</h3>
-        <p>Seamless, secure, and conversion-driven online stores for all scales.</p>
+
+      <div class="slider-item" style="background-image: url('images/bg_3.jpg');">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row slider-text align-items-center justify-content-center text-center">
+            <div class="col-md-10 col-sm-12 ftco-animate">
+              <h1 class="mb-3">Book a table for yourself at a time convenient for you</h1>
+              <p><a href="reservation.html" class="btn btn-primary btn-outline-white px-5 py-3">Book a table</a></p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="service-card">
-        <h3>SEO & Digital Marketing</h3>
-        <p>Grow your reach with data-driven SEO, SEM, and social media strategies.</p>
+    </section>
+    <!-- END slider -->
+
+    <div class="ftco-section-reservation">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 reservation pt-5 px-5">
+            <div class="block-17">
+              <form action="index.html" method="post" class="d-block d-lg-flex">
+                <div class="fields d-block d-lg-flex">
+
+                  <div class="textfield-name one-third"><input type="text" class="form-control" placeholder="Name"></div>
+
+                  <div class="textfield-phone one-third"><input type="text" class="form-control" placeholder="Phone"></div>
+
+                  <div class="book-date one-third"><input type="text" id="book_date" class="form-control" placeholder="M/D/YYYY"></div>
+
+                  <div class="book-time one-third">
+                    <input type="text" id="book_time" class="form-control" placeholder="Time">
+                  </div>
+
+                  <div class="select-wrap one-third">
+                    <div class="icon"><span class="ion-ios-arrow-down"></span></div>
+                    <select name="" id="" class="form-control">
+                      <option value="">Person</option>
+                      <option value="">1</option>
+                      <option value="">2</option>
+                      <option value="">3</option>
+                      <option value="">4+</option>
+                    </select>
+                  </div>
+                </div>
+                <input type="submit" class="search-submit btn btn-primary" value="Book a table">  
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
-  <section id="unique-selling-points" class="animate-on-scroll">
-    <h2>What Makes Us Unique</h2>
-    <ul>
-      <li><strong>Tailored Solutions:</strong> We craft custom web and branding solutions perfectly aligned with your business goals.</li>
-      <li><strong>Cutting-Edge Technology:</strong> We use the latest tools and frameworks to build scalable, fast, and secure digital experiences.</li>
-      <li><strong>Creative Excellence:</strong> Stunning UI/UX designs and branding that set you apart from competitors.</li>
-      <li><strong>Client-Centric Approach:</strong> Transparent communication, quick turnaround, and unlimited revisions to ensure satisfaction.</li>
-      <li><strong>Global Delivery, Local Touch:</strong> Crafted in India, delivered worldwide with attention to cultural nuances.</li>
-    </ul>
-  </section>
-  <section id="faq"  class="animate-on-scroll">
-    <h2>Frequently Asked Questions</h2>
-    <details>
-      <summary>What industries do you specialize in?</summary>
-      <p>We serve a wide range of industries including eCommerce, tech startups, education, healthcare, and more.</p>
-    </details>
-    <details>
-      <summary>How long does a typical project take?</summary>
-      <p>Project timelines vary based on scope, but most websites or apps are delivered within 4 to 12 weeks.</p>
-    </details>
-    <details>
-      <summary>Do you provide post-launch support?</summary>
-      <p>Yes, we offer maintenance packages and ongoing support to keep your digital assets running smoothly.</p>
-    </details>
-    <details>
-      <summary>Can you help with SEO and digital marketing?</summary>
-      <p>Absolutely! We provide comprehensive SEO, SEM, and social media marketing services to grow your reach.</p>
-    </details>
-  </section>
-  <!-- Client Reviews Section -->
-  <section id="client-reviews"  class="animate-on-scroll">
-    <h2>Client Reviews</h2>
-    <div class="testimonial-slider">
-      <div class="testimonial active">
-        <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=facearea&w=256&h=256&facepad=2" alt="Sarah Chen" />
-        <div class="testimonial-content">
-          <p>“The Byteweave team exceeded our expectations. The website is stunning and our traffic doubled in just a month.”</p>
-          <span class="client-name">Sarah Chen</span>
-          <span class="client-meta">Toronto, Canada</span>
+
+     <section class="ftco-section-2">
+      <div class="container d-flex">
+        <div class="section-2-blocks-wrapper row">
+          <div class="img col-sm-12 col-lg-6" style="background-image: url('images/about-2.jpg');">
+          </div>
+          <div class="text col-lg-6 ftco-animate">
+            <div class="text-inner align-self-start">
+              <span class="subheading">About Tasty</span>
+              <h3 class="heading">Our chef cooks the most delicious food for you</h3>
+              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+
+              <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="testimonial">
-        <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=facearea&w=256&h=256&facepad=2" alt="Daniel Bekele" />
-        <div class="testimonial-content">
-          <p>“Professional, creative, and always on time. Highly recommended for digital transformation projects.”</p>
-          <span class="client-name">Daniel Bekele</span>
-          <span class="client-meta">Addis Ababa, Ethiopia</span>
+    </section>
+
+    <section class="ftco-section bg-light">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <span class="subheading">Our Menu</span>
+            <h2>Discover Our Exclusive Menu</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 dish-menu">
+
+            <div class="nav nav-pills justify-content-center ftco-animate" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+              <a class="nav-link py-3 px-4 active" id="v-pills-home-tab" data-toggle="pill" href="index.html#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"><span class="flaticon-meat"></span> Main</a>
+              <a class="nav-link py-3 px-4" id="v-pills-profile-tab" data-toggle="pill" href="index.html#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false"><span class="flaticon-cutlery"></span> Dessert</a>
+              <a class="nav-link py-3 px-4" id="v-pills-messages-tab" data-toggle="pill" href="index.html#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false"><span class="flaticon-cheers"></span> Drinks</a>
+            </div>
+
+            <div class="tab-content py-5" id="v-pills-tabContent">
+              <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dish-3.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Grilled Beef with potatoes</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dish-4.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Fruit Vanilla Ice Cream</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dish-5.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Asian Hoisin Pork</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dish-6.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Spicy Fried Rice &amp; Bacon</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dish-7.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Mango Chili Chutney</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dish-8.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Savory Watercress Chinese Pancakes</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dish-9.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Soup With Vegetables And Meat</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dish-10.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Udon Noodles With Vegetables</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dish-11.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Baked Lobster With A Garnish</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(https://preview.byteweavestudio.com/theme/tasty/images/dish-12.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Octopus with Vegetables</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- END -->
+
+              <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dessert-1.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Grilled Beef with potatoes</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dessert-2.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Grilled Beef with potatoes</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dessert-3.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Grilled Beef with potatoes</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dessert-4.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Grilled Beef with potatoes</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dessert-5.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Grilled Beef with potatoes</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dessert-6.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Tiramisu</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dessert-7.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Chocolate Cream</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dessert-8.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Pizza Pie</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dessert-9.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Sicilian Ricotta</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/dessert-10.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Mango FLoat</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- END -->
+
+              <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/drink-1.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Lemon Juice</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/drink-2.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Guava Juice</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/drink-3.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Sprite</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/drink-4.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Cola</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/drink-5.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Wine</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6">
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/drink-6.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Beer</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/drink-7.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Mango Juice</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/drink-8.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Apple Juice</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/drink-9.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Strawberry Juice</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="menus d-flex ftco-animate">
+                      <div class="menu-img" style="background-image: url(images/drink-10.jpg);"></div>
+                      <div class="text d-flex">
+                        <div class="one-half">
+                          <h3>Orange Juice</h3>
+                          <p><span>Meat</span>, <span>Potatoes</span>, <span>Rice</span>, <span>Tomatoe</span></p>
+                        </div>
+                        <div class="one-forth">
+                          <span class="price">$29</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-12 pt-4 text-center ftco-animate">
+                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost</p>
+                <span><a href="reservation.html" class="btn btn-primary btn-outline-primary p-3">Make a Reservation</a></span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="testimonial">
-        <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=facearea&w=256&h=256&facepad=2" alt="Amina Tesfaye" />
-        <div class="testimonial-content">
-          <p>“They brought our brand to life online. The UI/UX is beautiful and user feedback has been fantastic.”</p>
-          <span class="client-name">Amina Tesfaye</span>
-          <span class="client-meta">Bahir Dar, Ethiopia</span>
+    </section>
+
+    <section class="ftco-section parallax-img" style="background-image: url('images/bg_3.jpg');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
+            <h2>Our Specialties</h2>
+          </div>
         </div>
       </div>
-      <div class="testimonial">
-        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=facearea&w=256&h=256&facepad=2" alt="Lucas Tremblay" />
-        <div class="testimonial-content">
-          <p>“Byteweave’s eCommerce solution helped us grow sales by 60%. Their support is top-notch.”</p>
-          <span class="client-name">Lucas Tremblay</span>
-          <span class="client-meta">Montreal, Canada</span>
+    </section>
+    <section class="ftco-section bg-light">
+      <div class="container special-dish">
+        <div class="row d-flex no-gutters">
+          <div class="col-lg-6">
+            <div class="block-3 d-md-flex ftco-animate">
+              <div class="image order-last" style="background-image: url(images/dish-3.jpg);"></div>
+              <div class="text text-center order-first">
+                <h2 class="heading">Beef Steak</h2>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts</p>
+                <span class="price">from $10.00</span>
+              </div>
+            </div>
+            <div class="block-3 d-md-flex ftco-animate">
+              <div class="image order-first" style="background-image: url(images/dish-4.jpg);"></div>
+              <div class="text text-center order-first">
+                <h2 class="heading">Beef Ribs Steak</h2>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts</p>
+                <span class="price">from $10.00</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="block-3 d-md-flex ftco-animate">
+              <div class="image order-last" style="background-image: url(images/dish-5.jpg);"></div>
+              <div class="text text-center order-first">
+                <h2 class="heading">Chopsuey</h2>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts</p>
+                <span class="price">from $10.00</span>
+              </div>
+            </div>
+            <div class="block-3 d-md-flex ftco-animate">
+              <div class="image order-first" style="background-image: url(images/dish-6.jpg);"></div>
+              <div class="text text-center order-first">
+                <h2 class="heading">Roasted Chieken</h2>
+                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts</p>
+                <span class="price">from $10.00</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="testimonial">
-        <img src="https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&fit=facearea&w=256&h=256&facepad=2" alt="Maya Girma" />
-        <div class="testimonial-content">
-          <p>“The team is responsive and innovative. Our digital marketing ROI improved dramatically.”</p>
-          <span class="client-name">Maya Girma</span>
-          <span class="client-meta">Addis Ababa, Ethiopia</span>
+    </section>
+
+    <section class="ftco-section testimony-section">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <span class="subheading">Guests Says</span>
+            <h2>Our Satisfied Guests says</h2>
+          </div>
+        </div>
+        <div class="row ftco-animate">
+          <div class="carousel owl-carousel ftco-owl">
+            <div class="item text-center">
+              <div class="testimony-wrap p-4 pb-5">
+                <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)" style="border: 1px solid red;"></div>
+                <div class="text">
+                  <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span></p>
+                  <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                  <p class="name">Dennis Green</p>
+                  <span class="position">Guests from Italy</span>
+                </div>
+              </div>
+            </div>
+            <div class="item text-center">
+              <div class="testimony-wrap p-4 pb-5">
+                <div class="user-img mb-4" style="background-image: url(images/person_2.jpg)" style="border: 1px solid red;"></div>
+                <div class="text">
+                  <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span></p>
+                  <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                  <p class="name">Dennis Green</p>
+                  <span class="position">Guests from Italy</span>
+                </div>
+              </div>
+            </div>
+            <div class="item text-center">
+              <div class="testimony-wrap p-4 pb-5">
+                <div class="user-img mb-4" style="background-image: url(images/person_3.jpg)" style="border: 1px solid red;"></div>
+                <div class="text">
+                  <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span></p>
+                  <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                  <p class="name">Dennis Green</p>
+                  <span class="position">Guests from Italy</span>
+                </div>
+              </div>
+            </div>
+            <div class="item text-center">
+              <div class="testimony-wrap p-4 pb-5">
+                <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)" style="border: 1px solid red;"></div>
+                <div class="text">
+                  <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span></p>
+                  <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                  <p class="name">Dennis Green</p>
+                  <span class="position">Guests from Italy</span>
+                </div>
+              </div>
+            </div>
+            <div class="item text-center">
+              <div class="testimony-wrap p-4 pb-5">
+                <div class="user-img mb-4" style="background-image: url(images/person_1.jpg)" style="border: 1px solid red;"></div>
+                <div class="text">
+                  <p class="star-rate"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star-half-full"></span></p>
+                  <p class="mb-5">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                  <p class="name">Dennis Green</p>
+                  <span class="position">Guests from Italy</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="testimonial">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png" alt="Olivier Dubois" />
-        <div class="testimonial-content">
-          <p>“Clear communication and creative ideas throughout the project. We’ll definitely work with Byteweave again.”</p>
-          <span class="client-name">Olivier Dubois</span>
-          <span class="client-meta">Vancouver, Canada</span>
+    </section>
+
+    <section class="ftco-section bg-light">
+      <div class="container">
+        <div class="row justify-content-center mb-5 pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <span class="subheading">Blog</span>
+            <h2>Recent Blog</h2>
+          </div>
+        </div>
+        <div class="row ftco-animate">
+          <div class="carousel1 owl-carousel ftco-owl">
+            <div class="item">
+              <div class="blog-entry">
+                <a href="blog-single.html" class="block-20" style="background-image: url('images/image_5.jpg');">
+                </a>
+                <div class="text p-4">
+                  <div class="meta">
+                    <div><a href="index.html#">July 7, 2018</a></div>
+                    <div><a href="index.html#">Admin</a></div>
+                  </div>
+                  <h3 class="heading"><a href="index.html#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <p class="clearfix">
+                    <a href="index.html#" class="float-left read">Read more</a>
+                    <a href="index.html#" class="float-right meta-chat"><span class="icon-chat"></span> 3</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="blog-entry" data-aos-delay="100">
+                <a href="blog-single.html" class="block-20" style="background-image: url('images/image_6.jpg');">
+                </a>
+                <div class="text p-4">
+                  <div class="meta">
+                    <div><a href="index.html#">July 7, 2018</a></div>
+                    <div><a href="index.html#">Admin</a></div>
+                  </div>
+                  <h3 class="heading"><a href="index.html#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <p class="clearfix">
+                    <a href="index.html#" class="float-left read">Read more</a>
+                    <a href="index.html#" class="float-right meta-chat"><span class="icon-chat"></span> 3</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="blog-entry" data-aos-delay="200">
+                <a href="blog-single.html" class="block-20" style="background-image: url('images/image_7.jpg');">
+                </a>
+                <div class="text p-4">
+                  <div class="meta">
+                    <div><a href="index.html#">July 7, 2018</a></div>
+                    <div><a href="index.html#">Admin</a></div>
+                  </div>
+                  <h3 class="heading"><a href="index.html#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <p class="clearfix">
+                    <a href="index.html#" class="float-left read">Read more</a>
+                    <a href="index.html#" class="float-right meta-chat"><span class="icon-chat"></span> 3</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="blog-entry" data-aos-delay="200">
+                <a href="blog-single.html" class="block-20" style="background-image: url('images/image_8.jpg');">
+                </a>
+                <div class="text p-4">
+                  <div class="meta">
+                    <div><a href="index.html#">July 7, 2018</a></div>
+                    <div><a href="index.html#">Admin</a></div>
+                  </div>
+                  <h3 class="heading"><a href="index.html#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <p class="clearfix">
+                    <a href="index.html#" class="float-left read">Read more</a>
+                    <a href="index.html#" class="float-right meta-chat"><span class="icon-chat"></span> 3</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="blog-entry" data-aos-delay="200">
+                <a href="blog-single.html" class="block-20" style="background-image: url('https://preview.byteweavestudio.com/theme/tasty/images/image_9.jpg');">
+                </a>
+                <div class="text p-4">
+                  <div class="meta">
+                    <div><a href="index.html#">July 7, 2018</a></div>
+                    <div><a href="index.html#">Admin</a></div>
+                  </div>
+                  <h3 class="heading"><a href="index.html#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                  <p class="clearfix">
+                    <a href="index.html#" class="float-left read">Read more</a>
+                    <a href="index.html#" class="float-right meta-chat"><span class="icon-chat"></span> 3</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="testimonial-nav">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-      </div>
-    </div>
-  </section>
-  <!-- Programmer Animation Section -->
-  <section id="programmer-animation"  class="animate-on-scroll">
-    <div class="programmer-container">
-      <div class="desk"></div>
-      <div class="monitor">
-        <div class="screen">
-          <div class="code-line line1"></div>
-          <div class="code-line line2"></div>
-          <div class="code-line line3"></div>
-          <div class="code-line line4"></div>
+    </section>
+
+    <section class="instagram">
+      <div class="container-fluid">
+        <div class="row no-gutters justify-content-center pb-5">
+          <div class="col-md-7 text-center heading-section ftco-animate">
+            <h2><span>Instagram</span></h2>
+          </div>
         </div>
-        <div class="stand"></div>
+        <div class="row no-gutters">
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="images/insta-1.jpg" class="insta-img image-popup" style="background-image: url(images/insta-1.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="images/insta-2.jpg" class="insta-img image-popup" style="background-image: url(images/insta-2.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="images/insta-3.jpg" class="insta-img image-popup" style="background-image: url(images/insta-3.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="images/insta-4.jpg" class="insta-img image-popup" style="background-image: url(images/insta-4.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-12 col-md ftco-animate">
+            <a href="images/insta-5.jpg" class="insta-img image-popup" style="background-image: url(images/insta-5.jpg);">
+              <div class="icon d-flex justify-content-center">
+                <span class="icon-instagram align-self-center"></span>
+              </div>
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="person">
-        <div class="head"></div>
-        <div class="body"></div>
-        <div class="arm left"></div>
-        <div class="arm right"></div>
-        <div class="hand left"></div>
-        <div class="hand right"></div>
-        <div class="leg left"></div>
-        <div class="leg right"></div>
+    </section>
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Tasty</h2>
+              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+                <li class="ftco-animate"><a href="index.html#"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="index.html#"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="index.html#"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+             <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Opening Hours</h2>
+              <ul class="list-unstyled">
+                <li><a href="index.html#" class="py-2 d-block">Monday: <span>08: - 22:00</span></a></li>
+                <li><a href="index.html#" class="py-2 d-block">Tuesday: <span>08: - 22:00</span></a></li>
+                <li><a href="index.html#" class="py-2 d-block">Wednesday: <span>08: - 22:00</span></a></li>
+                <li><a href="index.html#" class="py-2 d-block">Thursday: <span>08: - 22:00</span></a></li>
+                <li><a href="index.html#" class="py-2 d-block">Friday: <span>08: - 22:00</span></a></li>
+                <li><a href="index.html#" class="py-2 d-block">Saturday: <span>08: - 22:00</span></a></li>
+                <li><a href="index.html#" class="py-2 d-block">Sunday: <span>08: - 22:00</span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+             <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Contact Information</h2>
+              <ul class="list-unstyled">
+                <li><a href="index.html#" class="py-2 d-block">198 West 21th Street, Suite 721 New York NY 10016</a></li>
+                <li><a href="index.html#" class="py-2 d-block">+ 1235 2355 98</a></li>
+                <li><a href="index.html#" class="py-2 d-block"><span class="__cf_email__" data-cfemail="1e777078715e67716b6c6d776a7b307d7173">[email&#160;protected]</span></a></li>
+                <li><a href="index.html#" class="py-2 d-block"><span class="__cf_email__" data-cfemail="90f5fdf1f9fcd0f5fdf1f9fcbef3fffd">[email&#160;protected]</span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Newsletter</h2>
+              <p>Far far away, behind the word mountains, far from the countries.</p>
+              <form action="index.html#" class="subscribe-form">
+                <div class="form-group">
+                  <span class="icon icon-paper-plane"></span>
+                  <input type="text" class="form-control" placeholder="Subscribe">
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+
+            <p><!-- Link back to byteweavestudio can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://byteweavestudio.com" target="_blank">byteweavestudio</a>
+  <!-- Link back to byteweavestudio can't be removed. Template is licensed under CC BY 3.0. --></p>
+          </div>
+        </div>
       </div>
-      <div class="keyboard"></div>
-      <div class="chair"></div>
-    </div>
-    <div class="programmer-caption">
-      <b>Building your web presence, line by line.</b>
-    </div>
-  </section>
-  <!-- Contact Info Section -->
-  <section id="contact-info"  class="animate-on-scroll">
-    <h2>Contact Info</h2>
-    <div class="contact-methods">
-      <div class="contact-item">
-        <span class="icon icon-mail">
-          <span class="envelope"></span>
-          <span class="flap"></span>
-        </span>
-        <a class="contact-link" href="mailto:info.byteweavestudio.app@gmail.com">info.byteweavestudio.app@gmail.com</a>
-      </div>
-      <div class="contact-item">
-        <span class="icon icon-phone">
-          <span class="phone-body"></span>
-          <span class="phone-dot"></span>
-        </span>
-        <a class="contact-link" href="tel:+919699957917">+91 96999 57917</a>
-      </div>
-      <div class="contact-item">
-        <span class="icon icon-instagram">
-          <span class="insta-bg"></span>
-          <span class="insta-circle"></span>
-          <span class="insta-dot"></span>
-        </span>
-        <a class="contact-link" href="https://instagram.com/byteweave_studio" target="_blank">@byteweave_studio</a>
-      </div>
-    </div>
-  </section>
-  <footer>
-    <p>&copy; 2025 Byteweave Studio India. All rights reserved.</p>
-  </footer>
-  <script>
-    // Hamburger menu for mobile navigation
-    const hamburger = document.getElementById('hamburger');
-    const navUl = document.querySelector('nav ul');
-    hamburger.addEventListener('click', () => {
-      navUl.classList.toggle('active');
-    });
-    // Hide menu after clicking a link (on mobile)
-    document.querySelectorAll('nav ul li a').forEach(link => {
-      link.addEventListener('click', function(e) {
-        if (this.hash) {
-          e.preventDefault();
-          document.querySelector(this.hash).scrollIntoView({
-            behavior: 'smooth'
-          });
-          navUl.classList.remove('active');
-        }
-      });
-    });
-    // CTA button scroll to Services
-    document.getElementById('servicesScroll').addEventListener('click', function() {
-      document.getElementById('services').scrollIntoView({ behavior: 'smooth' });
-    });
-
-    // Particle background (simple JS, no external libs)
-    const particlesJS = document.getElementById('particles-js');
-    function setCanvasSize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      canvas.style.width = window.innerWidth + 'px';
-      canvas.style.height = window.innerHeight + 'px';
-    }
-    let canvas = document.createElement('canvas');
-    setCanvasSize();
-    canvas.style.position = 'absolute';
-    canvas.style.top = 0; canvas.style.left = 0;
-    canvas.style.width = '100vw';
-    canvas.style.height = '100vh';
-    canvas.style.pointerEvents = 'none';
-    particlesJS.appendChild(canvas);
-
-    let ctx = canvas.getContext('2d');
-    let particles = [];
-    let colors = ['#00ffe7','#2e6fff','#ff00e0','#ffeb3b'];
-
-    function randomBetween(a,b) {return a + Math.random()*(b-a);}
-    function createParticles() {
-      particles = [];
-      let w = window.innerWidth, h = window.innerHeight;
-      let count = w < 700 ? 40 : 80;
-      for(let i=0;i<count;i++){
-        particles.push({
-          x: randomBetween(0,w),
-          y: randomBetween(0,h),
-          r: randomBetween(1.5,3.5),
-          dx: randomBetween(-0.6,0.6),
-          dy: randomBetween(-0.6,0.6),
-          color: colors[Math.floor(Math.random()*colors.length)]
-        });
-      }
-    }
-    createParticles();
-
-    function drawParticles(){
-      let w = canvas.width, h = canvas.height;
-      ctx.clearRect(0,0,w,h);
-      for(let i=0;i<particles.length;i++){
-        let p=particles[i];
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,2*Math.PI);
-        ctx.fillStyle=p.color;
-        ctx.globalAlpha = 0.8;
-        ctx.fill();
-        ctx.globalAlpha = 1;
-        // Move
-        p.x += p.dx;
-        p.y += p.dy;
-        // Bounce
-        if(p.x<0||p.x>w) p.dx*=-1;
-        if(p.y<0||p.y>h) p.dy*=-1;
-        // Connect nearby
-        for(let j=i+1;j<particles.length;j++){
-          let q=particles[j];
-          let dist = Math.hypot(p.x-q.x,p.y-q.y);
-          if(dist<90){
-            ctx.beginPath();
-            ctx.moveTo(p.x,p.y);
-            ctx.lineTo(q.x,q.y);
-            ctx.strokeStyle = p.color;
-            ctx.globalAlpha = 0.13;
-            ctx.lineWidth = 1.2;
-            ctx.stroke();
-            ctx.globalAlpha = 1;
-          }
-        }
-      }
-      requestAnimationFrame(drawParticles);
-    }
-    drawParticles();
-
-    window.addEventListener('resize',()=>{
-      setCanvasSize();
-      createParticles();
-    });
-
-    // Testimonial slider logic
-    const testimonials = document.querySelectorAll('.testimonial-slider .testimonial');
-    const dots = document.querySelectorAll('.testimonial-nav .dot');
-    let current = 0;
-    let testimonialInterval = null;
-
-    function showTestimonial(idx) {
-      testimonials.forEach((t, i) => {
-        t.classList.toggle('active', i === idx);
-        dots[i].classList.toggle('active', i === idx);
-      });
-      current = idx;
-    }
-
-    function nextTestimonial() {
-      showTestimonial((current + 1) % testimonials.length);
-    }
-
-    dots.forEach((dot, idx) => {
-      dot.addEventListener('click', () => {
-        showTestimonial(idx);
-        resetInterval();
-      });
-    });
-
-    function resetInterval() {
-      clearInterval(testimonialInterval);
-      testimonialInterval = setInterval(nextTestimonial, 5000);
-    }
-
-    showTestimonial(0);
-    testimonialInterval = setInterval(nextTestimonial, 5000);
-  </script>
+    </footer>
+    
   
-  <script>
-    // Scroll-triggered animation using Intersection Observer
-const observer = new IntersectionObserver((entries, obs) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('in-view');
-      obs.unobserve(entry.target); // Animate once; remove if you want repeat
-    }
-  });
-}, { threshold: 0.15 });
 
-document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
 
-  </script>
-</body>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/jquery.easing.1.3.js"></script>
+  <script src="js/jquery.waypoints.min.js"></script>
+  <script src="js/jquery.stellar.min.js"></script>
+  <script src="js/owl.carousel.min.js"></script>
+  <script src="js/jquery.magnific-popup.min.js"></script>
+  <script src="js/aos.js"></script>
+  <script src="js/jquery.animateNumber.min.js"></script>
+  <script src="js/bootstrap-datepicker.js"></script>
+  <script src="js/jquery.timepicker.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="js/google-map.js"></script>
+  <script src=".js/main.js"></script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+    
+  </body>
 </html>
