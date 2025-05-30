@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ProCafe - Animated Cafe Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6C63FF;
+      --secondary: #FF6584;
+      --bg: #F8F8FF;
+      --text: #22223B;
+      --accent: #43E97B;
+      --white: #fff;
+    }
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+    }
+    header {
+      background: linear-gradient(120deg, var(--primary), var(--secondary));
+      color: var(--white);
+      padding: 2rem 0 0 0;
+      text-align: center;
+    }
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      letter-spacing: 2px;
+    }
+    header p {
+      font-size: 1.3rem;
+      margin-top: 1rem;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin: 1.5rem 0 0.5rem 0;
+    }
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      position: relative;
+      transition: color 0.3s;
+    }
+    nav a::after {
+      content: '';
+      display: block;
+      height: 2px;
+      background: var(--accent);
+      width: 0;
+      transition: width 0.3s;
+      margin: 0 auto;
+    }
+    nav a:hover {
+      color: var(--accent);
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ===== INFINITE IMAGE SLIDER ===== */
+    .auto-slider-wrapper {
+      width: 100vw;
+      overflow: hidden;
+      background: linear-gradient(90deg, #6C63FF 0%, #FF6584 100%);
+      padding: 32px 0 40px 0;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .auto-slider-track {
+      display: flex;
+      width: calc(440px * 12); /* 6 images x 2 for seamless loop */
+      animation: scroll-slider 22s linear infinite;
+      align-items: center;
+      gap: 32px;
+    }
+    .auto-slider-wrapper:hover .auto-slider-track {
+      animation-play-state: paused;
+    }
+    .auto-slider-track img {
+      width: 420px;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 22px;
+      box-shadow: 0 8px 32px rgba(108,99,255,0.14);
+      transition: transform 0.8s cubic-bezier(.4,2,.6,1), box-shadow 0.6s;
+      opacity: 0.97;
+      animation: popIn 3s infinite alternate;
+      background: #fff;
+      border: 4px solid #fff;
+    }
+    @keyframes scroll-slider {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes popIn {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.04) rotate(-1deg);}
+    }
+    @media (max-width: 900px) {
+      .auto-slider-track img { width: 70vw; height: 120px; }
+      .auto-slider-track { width: calc(70vw * 12); }
+    }
+
+    /* ===== PARALLAX IMAGE ON SCROLL ===== */
+    .parallax-section {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      margin: 3rem 0 2rem 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .parallax-img-container {
+      width: 90vw;
+      max-width: 800px;
+      height: 340px;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(67,233,123,0.13);
+      position: relative;
+      background: #fff;
+      will-change: transform;
+      transition: box-shadow 0.4s;
+    }
+    .parallax-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(.4,2,.6,1), filter 0.7s;
+      filter: grayscale(20%) brightness(0.98);
+    }
+    .parallax-img-container.scrolled img {
+      transform: scale(1.06) rotate(-2deg);
+      filter: none;
+      box-shadow: 0 12px 40px rgba(255,101,132,0.16);
+    }
+    .parallax-img-container.scrolled {
+      box-shadow: 0 16px 60px rgba(67,233,123,0.17);
+    }
+
+    /* ===== REST OF THE PAGE ===== */
+    section {
+      padding: 3rem 1rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      color: var(--primary);
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .about-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-img {
+      flex: 1 1 280px;
+      min-width: 220px;
+      max-width: 350px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(255,101,132,0.13);
+    }
+    .about-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .about-text {
+      flex: 2 1 320px;
+      font-size: 1.13rem;
+      color: #444;
+      line-height: 1.8;
+    }
+    .menu-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .menu-item {
+      background: var(--white);
+      border-radius: 18px;
+      box-shadow: 0 4px 16px rgba(67,233,123,0.10);
+      padding: 1.5rem;
+      width: 260px;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-item:hover {
+      transform: translateY(-8px) scale(1.04);
+      box-shadow: 0 8px 32px rgba(108,99,255,0.13);
+    }
+    .menu-item img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      animation: popIn 0.8s;
+    }
+    .menu-item h3 {
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+      font-size: 1.2rem;
+    }
+    .menu-item p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+    .menu-item .price {
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .contact-content {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .contact-form {
+      background: var(--white);
+      border-radius: 15px;
+      box-shadow: 0 4px 16px rgba(67,233,123,0.08);
+      padding: 2rem;
+      min-width: 300px;
+      flex: 1 1 300px;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 0.7rem;
+      margin-bottom: 1rem;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus {
+      border: 1.5px solid var(--primary);
+    }
+    .contact-form button {
+      background: var(--secondary);
+      color: var(--white);
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .contact-form button:hover {
+      background: var(--primary);
+    }
+    .map {
+      flex: 1 1 350px;
+      min-width: 320px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(67,233,123,0.08);
+      min-height: 320px;
+    }
+    @media (max-width: 900px) {
+      .about-content, .contact-content, .menu-list {
+        flex-direction: column;
+        align-items: center;
+      }
+      .parallax-img-container { height: 180px; }
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+      .section-title { font-size: 1.5rem; }
+      .auto-slider-track img { height: 90px; }
+      .parallax-section { height: 160px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ProCafe</h1>
+    <p>Where every cup is a masterpiece. Enjoy our vibrant, cozy, and animated cafe experience!</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#menu">Menu</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <!-- Infinite Auto Image Slider -->
+    <div class="auto-slider-wrapper">
+      <div class="auto-slider-track">
+        <img src="1.png" alt="Cafe Image 1">
+        <img src="2.png" alt="Cafe Image 2">
+        <img src="3.png" alt="Cafe Image 3">
+        <img src="4.png" alt="Cafe Image 4">
+        <img src="5.png" alt="Cafe Image 5">
+        <img src="6.png" alt="Cafe Image 6">
+        <!-- Repeat for seamless infinite effect -->
+        <img src="1.png" alt="Cafe Image 1">
+        <img src="2.png" alt="Cafe Image 2">
+        <img src="3.png" alt="Cafe Image 3">
+        <img src="4.png" alt="Cafe Image 4">
+        <img src="5.png" alt="Cafe Image 5">
+        <img src="6.png" alt="Cafe Image 6">
+      </div>
+    </div>
+  </header>
+
+  <!-- Parallax Animated Image on Scroll -->
+  <div class="parallax-section">
+    <div class="parallax-img-container" id="parallaxImg">
+      <img src="1.png" alt="Featured Cafe Parallax">
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2 class="section-title">About ProCafe</h2>
+    <div class="about-content">
+      <div class="about-img">
+        <img src="2.png" alt="About Cafe">
+      </div>
+      <div class="about-text">
+        <p>
+          Welcome to <b>ProCafe</b>, your neighborhood oasis for coffee lovers and foodies alike! Our cafe blends modern style with a cozy atmosphere, offering a vibrant space filled with animated art and delightful aromas. Whether you're seeking a creative workspace, a relaxing spot to unwind, or a place to catch up with friends, ProCafe is the perfect destination.
+        </p>
+        <ul>
+          <li>Freshly brewed specialty coffees</li>
+          <li>Artisan pastries and healthy bites</li>
+          <li>Free Wi-Fi and comfy seating</li>
+          <li>Friendly, passionate baristas</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section id="menu">
+    <h2 class="section-title">Our Menu</h2>
+    <div class="menu-list">
+      <div class="menu-item">
+        <img src="3.png" alt="Espresso">
+        <h3>Signature Espresso</h3>
+        <p>Rich, bold, and perfectly balanced. Served hot or iced.</p>
+        <div class="price">$3.50</div>
+      </div>
+      <div class="menu-item">
+        <img src="4.png" alt="Pastries">
+        <h3>Fresh Pastries</h3>
+        <p>Handcrafted daily: croissants, muffins, and more.</p>
+        <div class="price">$2.50</div>
+      </div>
+      <div class="menu-item">
+        <img src="5.png" alt="Smoothies">
+        <h3>Fruit Smoothies</h3>
+        <p>Refreshing blends of seasonal fruits and yogurt.</p>
+        <div class="price">$4.00</div>
+      </div>
+      <div class="menu-item">
+        <img src="6.png" alt="Sandwiches">
+        <h3>Gourmet Sandwiches</h3>
+        <p>Delicious, healthy, and made to order.</p>
+        <div class="price">$5.50</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2 class="section-title">Contact & Location</h2>
+    <div class="contact-content">
+      <form class="contact-form" autocomplete="off" onsubmit="event.preventDefault();alert('Thank you for reaching out! We will contact you soon.');this.reset();">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="4" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <div class="map">
+        <iframe
+          src="https://www.openstreetmap.org/export/embed.html?bbox=77.5946%2C12.9716%2C77.5946%2C12.9716&amp;layer=mapnik"
+          style="border:0; width:100%; height:100%; min-height:320px;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background:var(--primary);color:#fff;text-align:center;padding:1.2rem 0;margin-top:2rem;font-size:1rem;">
+    &copy; 2025 ProCafe. All rights reserved. | Designed with ❤️ by Byteweave studio parbhani
+  </footer>
+
+  <!-- Parallax Scroll Animation JS -->
+  <script>
+    // Parallax image scroll animation
+    const parallaxImg = document.getElementById('parallaxImg');
+    function handleParallax() {
+      const rect = parallaxImg.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.7) {
+        parallaxImg.classList.add('scrolled');
+      } else {
+        parallaxImg.classList.remove('scrolled');
+      }
+    }
+    window.addEventListener('scroll', handleParallax);
+    window.addEventListener('load', handleParallax);
+  </script>
+</body>
+</html>
