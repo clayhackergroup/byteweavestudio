@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vignesh Coaching Classes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --secondary: #00b894;
+      --accent: #ff512f;
+      --bg1: #f5f7fa;
+      --bg2: #e0eafc;
+      --dark: #222;
+      --radius: 2rem;
+      --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.10);
+      --transition: 0.4s cubic-bezier(.57,.21,.69,1.25);
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      background: var(--bg1);
+      overflow-x: hidden;
+      user-select: none;
+      touch-action: pan-x pan-y;
+    }
+    a { color: inherit; text-decoration: none; }
+    /* Header */
+    .header {
+      width: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: #fff;
+      padding: 1.5rem 2rem 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+    .header .logo {
+      display: flex;
+      align-items: center;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .header .logo img {
+      width: 48px;
+      height: 48px;
+      margin-right: 12px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.11);
+    }
+    .header nav {
+      display: flex;
+      gap: 2rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .header nav a {
+      color: #fff;
+      transition: color 0.2s;
+    }
+    .header nav a:hover {
+      color: #ffe082;
+    }
+    /* Hero Banner */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 3rem 2rem 2rem 2rem;
+      background: linear-gradient(90deg, var(--bg2) 60%, var(--bg1) 100%);
+      min-height: 55vh;
+    }
+    .hero-content {
+      flex: 1 1 340px;
+      max-width: 540px;
+      z-index: 2;
+    }
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .hero-desc {
+      font-size: 1.2rem;
+      color: #444;
+      margin-bottom: 2rem;
+    }
+    .hero-btn {
+      padding: 1rem 2.5rem;
+      background: linear-gradient(90deg, var(--accent), var(--secondary));
+      color: #fff;
+      border: none;
+      border-radius: 2rem;
+      font-size: 1.15rem;
+      font-weight: 600;
+      box-shadow: 0 4px 24px rgba(221,36,118,0.10);
+      cursor: pointer;
+      transition: transform 0.2s, background 0.4s;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-btn:hover {
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      transform: scale(1.08) rotate(-2deg);
+    }
+    .hero-img {
+      flex: 1 1 340px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 320px;
+      margin-top: 1rem;
+    }
+    .hero-img img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 2rem;
+      box-shadow: 0 8px 32px rgba(31,38,135,0.11);
+      animation: float 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes float {
+      to { transform: translateY(-18px) scale(1.03);}
+    }
+    /* Section */
+    .section {
+      padding: 3.5rem 2rem 2.5rem 2rem;
+      margin: 0 auto;
+      max-width: 1200px;
+      position: relative;
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      text-align: center;
+      color: var(--primary);
+      margin-bottom: 2.2rem;
+      letter-spacing: 1px;
+    }
+    /* Cards Grid */
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .card {
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      padding: 2rem 1.5rem;
+      min-width: 220px;
+      max-width: 320px;
+      flex: 1 1 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform var(--transition), box-shadow var(--transition);
+      opacity: 0;
+      transform: scale(0.93) translateY(40px);
+    }
+    .card.visible {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      transition-delay: 0.2s;
+    }
+    .card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.5rem;
+      color: var(--primary);
+    }
+    .card p, .card ul {
+      margin: 0;
+      font-size: 1rem;
+      color: #444;
+      text-align: center;
+    }
+    .card ul {
+      padding: 0;
+      list-style: none;
+    }
+    /* Location & Timings */
+    .location-map {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 1rem;
+      margin: 1rem auto 0 auto;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+      display: block;
+    }
+    /* Teachers */
+    .teacher-photo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.13);
+      border: 3px solid var(--primary);
+    }
+    /* Subjects */
+    .subject-icon {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 0.7rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.11);
+      background: #f0f0f0;
+      object-fit: cover;
+    }
+    /* Features */
+    .feature-icon {
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--secondary);
+    }
+    /* Testimonials */
+    .testimonials {
+      background: var(--bg2);
+      border-radius: 2rem;
+      padding: 2rem 1rem;
+      margin-top: 2rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+    .testimonial {
+      background: #fff;
+      border-radius: 1rem;
+      padding: 1.3rem 1.2rem;
+      min-width: 220px;
+      max-width: 350px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.09);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.7s;
+    }
+    .testimonial.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .testimonial .student-photo {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0.7rem;
+      border: 2px solid var(--secondary);
+    }
+    .testimonial .student-name {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 0.3rem;
+    }
+    .testimonial .student-text {
+      font-size: 1rem;
+      color: #444;
+      text-align: center;
+    }
+    /* Contact */
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .contact-info div {
+      font-size: 1.1rem;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    .contact-info i {
+      font-size: 1.3rem;
+      color: var(--primary);
+    }
+    /* Footer */
+    .footer {
+      background: var(--primary);
+      color: #fff;
+      text-align: center;
+      padding: 1.2rem 0 1rem 0;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      border-radius: 2rem 2rem 0 0;
+      margin-top: 2rem;
+    }
+    /* Responsive */
+    @media (max-width: 900px) {
+      .card-grid, .testimonials {
+        gap: 1rem;
+      }
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-content, .hero-img {
+        max-width: 100%;
+      }
+      .hero-img {
+        margin-top: 2rem;
+      }
+    }
+    @media (max-width: 700px) {
+      .section {
+        padding: 2.5rem 0.7rem;
+      }
+      .card-grid, .testimonials {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2rem;
+      }
+      .card, .testimonial {
+        min-width: 90vw;
+        max-width: 96vw;
+      }
+      .hero-title { font-size: 1.5rem; }
+      .section-title { font-size: 1.25rem; }
+    }
+    input, select, textarea { font-size: 16px !important; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <img src="https://img.icons8.com/color/96/physics.png" alt="vignesh Logo">
+      vignesh Classes
+    </div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#teachers">Teachers</a>
+      <a href="#subjects">Subjects</a>
+      <a href="#features">Features</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-title">India's Most Trusted Coaching Classes</div>
+      <div class="hero-desc">
+        Learn from the best teachers, excel in your board exams and competitive exams.<br>
+        <b>Live classes, doubt support, study material, and more!</b>
+      </div>
+      <button class="hero-btn">Enroll Now</button>
+    </div>
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=600&q=80" alt="Classroom">
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section class="section" id="about">
+    <div class="section-title">About vignesh Coaching Classes</div>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Our Mission</h3>
+        <p>Empowering students to achieve their dreams with affordable, high-quality education and mentorship.</p>
+      </div>
+      <div class="card">
+        <h3>Our Values</h3>
+        <ul>
+          <li>Integrity &amp; Dedication</li>
+          <li>Student-Centric Approach</li>
+          <li>Continuous Innovation</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Our Centers</h3>
+        <p>30+ centers across India, with state-of-the-art classrooms and online learning support.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location & Timings -->
+  <section class="section" id="location">
+    <div class="section-title">Location & Timings</div>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Our Main Center</h3>
+        <p>123 Main Street, City Center, New Delhi</p>
+        <img class="location-map" src="https://maps.googleapis.com/maps/api/staticmap?center=New+Delhi&zoom=14&size=400x200&markers=color:red%7CNew+Delhi" alt="Map">
+      </div>
+      <div class="card">
+        <h3>Timings</h3>
+        <ul>
+          <li>Mon-Fri: 8:00 AM - 8:00 PM</li>
+          <li>Sat-Sun: 9:00 AM - 4:00 PM</li>
+        </ul>
+        <p>Online &amp; Offline Batches Available</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Teachers -->
+  <section class="section" id="teachers">
+    <div class="section-title">Meet Our Top Teachers</div>
+    <div class="card-grid">
+      <div class="card">
+        <img class="teacher-photo" src="https://randomuser.me/api/portraits/men/32.jpg" alt="Dr. A. Sharma">
+        <h3>Dr. A. Sharma</h3>
+        <p>PhD Mathematics<br>12+ years experience</p>
+      </div>
+      <div class="card">
+        <img class="teacher-photo" src="https://randomuser.me/api/portraits/women/33.jpg" alt="Ms. R. Singh">
+        <h3>Ms. R. Singh</h3>
+        <p>MSc Physics<br>10+ years experience</p>
+      </div>
+      <div class="card">
+        <img class="teacher-photo" src="https://randomuser.me/api/portraits/men/54.jpg" alt="Mr. K. Patel">
+        <h3>Mr. K. Patel</h3>
+        <p>MA English<br>8+ years experience</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subjects -->
+  <section class="section" id="subjects">
+    <div class="section-title">Subjects Offered</div>
+    <div class="card-grid">
+      <div class="card">
+        <img class="subject-icon" src="https://img.icons8.com/color/96/calculator.png" alt="Mathematics">
+        <h3>Mathematics</h3>
+        <p>Algebra, Calculus, Geometry, Statistics</p>
+      </div>
+      <div class="card">
+        <img class="subject-icon" src="https://img.icons8.com/color/96/physics.png" alt="Science">
+        <h3>Science</h3>
+        <p>Physics, Chemistry, Biology</p>
+      </div>
+      <div class="card">
+        <img class="subject-icon" src="https://img.icons8.com/color/96/literature.png" alt="Languages">
+        <h3>Languages</h3>
+        <p>English, Hindi, Sanskrit</p>
+      </div>
+      <div class="card">
+        <img class="subject-icon" src="compu1.png" alt="Computer Science">
+        <h3>Computer Science</h3>
+        <p>Coding, Programming, IT Basics</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section" id="features">
+    <div class="section-title">Why Choose vignesh?</div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="feature-icon">🖥️</div>
+        <h3>Smart Classrooms</h3>
+        <p>Interactive boards, AC, digital resources for an immersive learning experience.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon">👨‍👩‍👧‍👦</div>
+        <h3>Personalized Attention</h3>
+        <p>Small batches, regular feedback, and dedicated mentors for every student.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon">📱</div>
+        <h3>Parent Portal</h3>
+        <p>Track progress, attendance, and results from anywhere, anytime.</p>
+      </div>
+      <div class="card">
+        <div class="feature-icon">💡</div>
+        <h3>24x7 Doubt Support</h3>
+        <p>Instant doubt resolution through app &amp; WhatsApp groups.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section" id="testimonials">
+    <div class="section-title">What Our Students Say</div>
+    <div class="testimonials">
+      <div class="testimonial">
+        <img class="student-photo" src="https://randomuser.me/api/portraits/women/65.jpg" alt="Student">
+        <div class="student-name">Priya Verma</div>
+        <div class="student-text">"vignesh Classes helped me crack NEET with 98 percentile! The teachers are amazing and the study material is top-notch."</div>
+      </div>
+      <div class="testimonial">
+        <img class="student-photo" src="https://randomuser.me/api/portraits/men/71.jpg" alt="Student">
+        <div class="student-name">Aman Gupta</div>
+        <div class="student-text">"I loved the live doubt sessions and the personal attention. Highly recommended for JEE aspirants!"</div>
+      </div>
+      <div class="testimonial">
+        <img class="student-photo" src="https://randomuser.me/api/portraits/women/23.jpg" alt="Student">
+        <div class="student-name">Sneha Singh</div>
+        <div class="student-text">"The teachers are so supportive. The parent portal kept my parents updated on my progress."</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <div class="section-title">Contact Us</div>
+    <div class="contact-info">
+      <div><i>📧</i> info@vigneshclasses.com</div>
+      <div><i>📞</i> +91 98765 43210</div>
+      <div><i>📍</i> 123 Main Street, New Delhi</div>
+    </div>
+    <form style="max-width:400px;margin:auto;">
+      <input type="text" placeholder="Your Name" required style="width:100%;padding:0.8rem 1rem;margin-bottom:1rem;border-radius:1rem;border:1px solid #ddd;font-size:1rem;">
+      <input type="email" placeholder="Your Email" required style="width:100%;padding:0.8rem 1rem;margin-bottom:1rem;border-radius:1rem;border:1px solid #ddd;font-size:1rem;">
+      <textarea placeholder="Your Message" required style="width:100%;padding:0.8rem 1rem;margin-bottom:1rem;border-radius:1rem;border:1px solid #ddd;font-size:1rem;min-height:80px;"></textarea>
+      <button type="submit" class="hero-btn" style="width:100%;">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    &copy; 2025 vignesh Coaching Classes | All rights reserved made with love by byteweavestudio parbhani.
+  </footer>
+
+  <script>
+    // Animate sections and cards on scroll
+    function revealSections() {
+      document.querySelectorAll('.section').forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          section.querySelectorAll('.card').forEach((card, i) => {
+            setTimeout(() => card.classList.add('visible'), 120 * i);
+          });
+        }
+      });
+      // Animate testimonials
+      document.querySelectorAll('.testimonials').forEach(box => {
+        const rect = box.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          box.querySelectorAll('.testimonial').forEach((t, i) => {
+            setTimeout(() => t.classList.add('visible'), 180 * i);
+          });
+        }
+      });
+    }
+    window.addEventListener('scroll', revealSections);
+    window.addEventListener('load', revealSections);
+
+    // Prevent double-tap zoom on iOS
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function(event) {
+      let now = (new Date()).getTime();
+      if (now - lastTouchEnd <= 300) event.preventDefault();
+      lastTouchEnd = now;
+    }, false);
+
+    // Smooth scroll for nav links
+    document.querySelectorAll('.header nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({ top: target.offsetTop - 60, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Simple form handler (demo)
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thank you for contacting us! We will get back to you soon.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
