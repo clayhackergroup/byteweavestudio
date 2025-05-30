@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PowerHouse Gym - Animated</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <!-- GSAP & ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: #181818;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      scroll-behavior: smooth;
+    }
+    a { color: #ff512f; text-decoration: none; }
+    header {
+      background: linear-gradient(90deg, #ff512f 0%, #dd2476 100%);
+      text-align: center;
+      padding: 60px 0 90px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin: 0;
+      letter-spacing: 2px;
+      font-weight: 700;
+    }
+    header p {
+      font-size: 1.25rem;
+      margin: 18px 0 0 0;
+    }
+
+    /* Gallery */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      padding: 40px 5vw;
+      background: #222;
+      margin-top: -40px;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s cubic-bezier(.23,1.23,.32,1), filter 0.4s;
+    }
+    .gallery-item .arrow-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      background: rgba(34,34,34,0.35);
+      transition: opacity 0.3s;
+      font-size: 3rem;
+      color: #fff;
+      pointer-events: none;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.08) rotate(-2deg);
+      filter: brightness(1.2) blur(1px);
+    }
+    .gallery-item:hover .arrow-overlay {
+      opacity: 1;
+    }
+
+    /* About Sections */
+    .about-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: center;
+      padding: 60px 5vw;
+      background: #111;
+      opacity: 0;
+    }
+    .about-section.reverse { flex-direction: row-reverse; background: #222; }
+    .about-text {
+      flex: 1 1 320px;
+      min-width: 260px;
+    }
+    .about-text h2 {
+      color: #ff512f;
+      margin-bottom: 18px;
+    }
+    .about-img {
+      flex: 1 1 320px;
+      text-align: center;
+    }
+    .about-img img {
+      max-width: 350px;
+      width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 6px 28px rgba(255,81,47,0.2);
+    }
+
+    /* Why Gym */
+    .why-gym {
+      padding: 60px 5vw;
+      background: #1a1a1a;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 40px;
+      opacity: 0;
+    }
+    .why-gym-content {
+      flex: 1 1 300px;
+    }
+    .why-gym-content h2 {
+      color: #ff512f;
+      margin-bottom: 18px;
+    }
+    .why-gym-content ul {
+      padding-left: 18px;
+      font-size: 1.1rem;
+    }
+    .why-gym-img {
+      flex: 1 1 320px;
+      text-align: center;
+    }
+    .why-gym-img img {
+      max-width: 350px;
+      border-radius: 18px;
+      box-shadow: 0 6px 28px rgba(255,81,47,0.2);
+    }
+
+    /* Pricing */
+    .pricing {
+      background: linear-gradient(90deg, #232526 0%, #414345 100%);
+      padding: 60px 5vw;
+      text-align: center;
+      opacity: 0;
+    }
+    .pricing h2 {
+      color: #ff512f;
+      margin-bottom: 32px;
+    }
+    .pricing-table {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .price-card {
+      background: #222;
+      padding: 32px 24px;
+      border-radius: 14px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+      min-width: 220px;
+      transition: transform 0.2s;
+      opacity: 0;
+    }
+    .price-card:hover {
+      transform: translateY(-8px) scale(1.04);
+    }
+    .price-card h3 {
+      color: #dd2476;
+      margin-bottom: 8px;
+    }
+    .price {
+      font-size: 2.2rem;
+      color: #ff512f;
+      margin: 10px 0 18px 0;
+      font-weight: bold;
+    }
+    .price-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 16px 0;
+      font-size: 1rem;
+    }
+    .price-card ul li {
+      margin: 8px 0;
+    }
+    .price-card button {
+      background: linear-gradient(90deg, #ff512f, #dd2476);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 28px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .price-card button:hover {
+      background: linear-gradient(90deg, #dd2476, #ff512f);
+    }
+
+    /* Contact */
+    .contact-section {
+      background: #181818;
+      padding: 60px 5vw;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: flex-start;
+      opacity: 0;
+    }
+    .contact-form {
+      flex: 1 1 320px;
+      background: #222;
+      padding: 32px 24px;
+      border-radius: 14px;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+    }
+    .contact-form h2 {
+      color: #ff512f;
+      margin-bottom: 18px;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0 18px 0;
+      border: none;
+      border-radius: 6px;
+      background: #292929;
+      color: #fff;
+      font-size: 1rem;
+    }
+    .contact-form button {
+      background: linear-gradient(90deg, #ff512f, #dd2476);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 28px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .contact-form button:hover {
+      background: linear-gradient(90deg, #dd2476, #ff512f);
+    }
+    .map-container {
+      flex: 1 1 320px;
+      min-width: 300px;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(255,81,47,0.15);
+    }
+
+    /* Extra Contact */
+    .extra-contact {
+      background: #222;
+      padding: 40px 5vw;
+      color: #fff;
+      text-align: center;
+      opacity: 0;
+    }
+    .extra-contact h2 {
+      color: #ff512f;
+      margin-bottom: 24px;
+    }
+    .extra-contact a { margin: 0 8px; color: #dd2476; }
+
+    /* Footer */
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 24px 0 10px 0;
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+    .love {
+      color: #ff512f;
+      font-size: 1.2em;
+      vertical-align: middle;
+    }
+    @media (max-width: 900px) {
+      .about-section, .why-gym, .contact-section {
+        flex-direction: column;
+        gap: 24px;
+      }
+      .about-img, .about-text, .why-gym-img, .why-gym-content, .contact-form, .map-container {
+        width: 100%;
+        min-width: 0;
+      }
+      .pricing-table {
+        flex-direction: column;
+        gap: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PowerHouse Gym</h1>
+    <p>Unleash Your Potential. Train Hard. Live Strong.</p>
+  </header>
+
+  <!-- Gallery Section -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-item">
+      <img src="gymboy1.png" alt="Gym 1">
+      <div class="arrow-overlay">&#8593;</div>
+    </div>
+    <div class="gallery-item">
+      <img src="gymboy2.png" alt="Gym 2">
+      <div class="arrow-overlay">&#8593;</div>
+    </div>
+    <div class="gallery-item">
+      <img src="gymboy4.png" alt="Gym 3">
+      <div class="arrow-overlay">&#8593;</div>
+    </div>
+    <div class="gallery-item">
+      <img src="gymboy5.png" alt="Gym 4">
+      <div class="arrow-overlay">&#8593;</div>
+    </div>
+    <div class="gallery-item">
+      <img src="gymb.png" alt="Gym 5">
+      <div class="arrow-overlay">&#8593;</div>
+    </div>
+    <div class="gallery-item">
+      <img src="gymboy3.png" alt="Gym 6">
+      <div class="arrow-overlay">&#8593;</div>
+    </div>
+  </section>
+
+  <!-- About Gym -->
+  <section class="about-section" id="about-gym">
+    <div class="about-text">
+      <h2>About PowerHouse Gym</h2>
+      <p>
+        Established in 2010, PowerHouse Gym is dedicated to empowering individuals through fitness. Our state-of-the-art equipment, expert trainers, and supportive community provide the perfect environment to achieve your health goals.
+      </p>
+      <p>
+        Whether you're a beginner or a pro, our gym offers tailored programs to fit your lifestyle and fitness level.
+      </p>
+    </div>
+    <div class="about-img">
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=500&q=80" alt="About Gym">
+    </div>
+  </section>
+
+  <!-- About Owner -->
+  <section class="about-section reverse" id="about-owner">
+    <div class="about-text">
+      <h2>Meet the Owner - Rajesh Kumar</h2>
+      <p>
+        Rajesh Kumar is a certified fitness enthusiast and entrepreneur with over 15 years of experience in the health and wellness industry. His passion for helping others achieve their fitness dreams inspired the creation of PowerHouse Gym.
+      </p>
+      <p>
+        Rajesh believes in a holistic approach to fitness that combines physical training, nutrition, and mental wellness.
+      </p>
+    </div>
+    <div class="about-img">
+      <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=400&q=80" alt="Owner">
+    </div>
+  </section>
+
+  <!-- About Trainer (Sneha) -->
+  <section class="about-section" id="about-trainer">
+    <div class="about-text">
+      <h2>Our Lead Trainer - Sneha Patel</h2>
+      <p>
+        Sneha Patel is a certified personal trainer specializing in strength training and functional fitness. With over 10 years of coaching experience, she tailors workout plans that maximize results and minimize injury.
+      </p>
+      <p>
+        Sneha is passionate about motivating clients and fostering a positive, supportive gym culture.
+      </p>
+    </div>
+    <div class="about-img">
+      <!-- Place gymgirl.png in the same folder as this HTML file -->
+      <img src="gymgirl.png" alt="Sneha Patel">
+    </div>
+  </section>
+
+  <!-- Why Gym -->
+  <section class="why-gym" id="why-gym">
+    <div class="why-gym-content">
+      <h2>Why Join a Gym?</h2>
+      <ul>
+        <li>Boosts physical and mental health</li>
+        <li>Access to professional equipment and trainers</li>
+        <li>Motivating community environment</li>
+        <li>Improves discipline and consistency</li>
+        <li>Reduces stress and increases energy</li>
+      </ul>
+    </div>
+    <div class="why-gym-img">
+      <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" alt="Why Gym">
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="pricing" id="pricing">
+    <h2>Membership Pricing</h2>
+    <div class="pricing-table">
+      <div class="price-card">
+        <h3>Basic</h3>
+        <div class="price">₹999/mo</div>
+        <ul>
+          <li>Unlimited Gym Access</li>
+          <li>Locker Facility</li>
+          <li>1 Personal Training Session</li>
+        </ul>
+        <button>Join Now</button>
+      </div>
+      <div class="price-card">
+        <h3>Standard</h3>
+        <div class="price">₹1499/mo</div>
+        <ul>
+          <li>All Basic Features</li>
+          <li>4 Personal Training Sessions</li>
+          <li>Group Classes</li>
+        </ul>
+        <button>Join Now</button>
+      </div>
+      <div class="price-card">
+        <h3>Premium</h3>
+        <div class="price">₹2499/mo</div>
+        <ul>
+          <li>All Standard Features</li>
+          <li>Unlimited Classes</li>
+          <li>Nutrition Consultation</li>
+        </ul>
+        <button>Join Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section" id="contact">
+    <form class="contact-form">
+      <h2>Contact Us</h2>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <div class="map-container">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0191634383637!2d144.9630579153168!3d-37.81410797975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d43f1f0f7b1%3A0x5045675218ce6e0!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sin!4v1622907110111!5m2!1sen!2sin" 
+        width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- Extra Contact Info -->
+  <section class="extra-contact" id="extra-contact">
+    <h2>Get In Touch</h2>
+    <p style="font-size:1.1rem; margin-bottom:12px;">Phone: +91 98765 43210</p>
+    <p style="font-size:1.1rem; margin-bottom:12px;">Email: contact@powerhousegym.com</p>
+    <p style="font-size:1.1rem;">Follow us on 
+      <a href="#" target="_blank">Facebook</a> | 
+      <a href="#" target="_blank">Instagram</a> | 
+      <a href="#" target="_blank">Twitter</a>
+    </p>
+  </section>
+
+  <footer>
+    &copy; 2025 PowerHouse Gym. All rights reserved.<br>
+    Made with <span class="love">&#10084;</span> for fitness.
+  </footer>
+
+  <script>
+    // GSAP ScrollTrigger Animations (repeatable on scroll up/down)
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Animate about, why-gym, pricing, contact, extra-contact sections
+    ['.about-section', '.why-gym', '.pricing', '.contact-section', '.extra-contact'].forEach(selector => {
+      gsap.utils.toArray(selector).forEach(el => {
+        gsap.fromTo(el, 
+          { opacity: 0, y: 60 }, 
+          { 
+            opacity: 1, y: 0, 
+            duration: 1, 
+            scrollTrigger: {
+              trigger: el,
+              start: "top 80%",
+              end: "bottom 20%",
+              toggleActions: "restart pause resume pause", // animate on scroll up and down
+              scrub: false,
+              // markers: true, // Uncomment for debugging
+            }
+          }
+        );
+      });
+    });
+
+    // Animate gallery images on scroll up/down
+    gsap.utils.toArray('.gallery-item').forEach((el, i) => {
+      gsap.fromTo(el, 
+        { opacity: 0, y: 40, scale: 0.9 }, 
+        { 
+          opacity: 1, y: 0, scale: 1,
+          duration: 0.8,
+          delay: i * 0.1,
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+            end: "bottom 10%",
+            toggleActions: "restart pause resume pause",
+            scrub: false,
+          }
+        }
+      );
+    });
+
+    // Animate pricing cards individually
+    gsap.utils.toArray('.price-card').forEach((el, i) => {
+      gsap.fromTo(el, 
+        { opacity: 0, y: 40, scale: 0.9 }, 
+        { 
+          opacity: 1, y: 0, scale: 1,
+          duration: 0.7,
+          delay: i * 0.15,
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+            end: "bottom 10%",
+            toggleActions: "restart pause resume pause",
+            scrub: false,
+          }
+        }
+      );
+    });
+
+    // Animate gallery images on hover with arrow
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        item.querySelector('img').style.transform = 'scale(1.13) rotate(-4deg)';
+        item.querySelector('img').style.filter = 'brightness(1.3) blur(2px)';
+        item.querySelector('.arrow-overlay').style.opacity = 1;
+      });
+      item.addEventListener('mouseleave', () => {
+        item.querySelector('img').style.transform = '';
+        item.querySelector('img').style.filter = '';
+        item.querySelector('.arrow-overlay').style.opacity = 0;
+      });
+    });
+
+    // Prevent contact form submission (demo)
+    document.querySelector('.contact-form').addEventListener('submit', function(e){
+      e.preventDefault();
+      alert('Thank you! We will contact you soon.');
+    });
+  </script>
+</body>
+</html>
