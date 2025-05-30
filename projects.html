@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Byteweave Studio India | Demo Projects</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #0f2027, #2c5364 80%);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 2rem 4vw;
+      background: rgba(20, 20, 40, 0.8);
+      box-shadow: 0 4px 32px 0 rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      animation: slideDown 0.7s cubic-bezier(.77,0,.18,1) 0.1s both;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-80px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .logo {
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      font-weight: 700;
+      color: #6ee7b7;
+      text-shadow: 0 2px 12px #0004;
+      cursor: pointer;
+      user-select: none;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 1.2rem;
+      font-size: 1.1rem;
+      position: relative;
+      transition: color 0.2s;
+    }
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #6ee7b7;
+      transition: width 0.3s;
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+    }
+    nav a:hover {
+      color: #6ee7b7;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6vw 4vw 2vw 4vw;
+      min-height: 50vh;
+      background: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1s cubic-bezier(.77,0,.18,1) 0.2s both;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .hero-content {
+      max-width: 600px;
+      z-index: 2;
+      background: rgba(20,20,40,0.7);
+      padding: 2rem 2rem;
+      border-radius: 24px;
+      box-shadow: 0 4px 32px 0 rgba(0,0,0,0.15);
+      text-align: center;
+    }
+    .hero-content h1 {
+      font-size: 2.5rem;
+      line-height: 1.1;
+      margin: 0 0 1rem 0;
+      color: #fff;
+      text-shadow: 0 4px 24px #0006;
+      animation: moveUp 0.7s 0.2s both;
+    }
+    .hero-content p {
+      font-size: 1.15rem;
+      color: #e0e0e0;
+      margin-bottom: 2rem;
+      animation: moveUp 0.7s 0.4s both;
+    }
+    .cta-btn {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: linear-gradient(90deg, #6ee7b7, #3b82f6);
+      color: #1e293b;
+      font-weight: bold;
+      border: none;
+      border-radius: 32px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 6px 32px 0 #0002;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: moveUp 0.7s 0.6s both;
+    }
+    .cta-btn:hover {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow: 0 12px 36px 0 #0003;
+    }
+    @keyframes moveUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .projects-section {
+      padding: 4vw 4vw 3vw 4vw;
+      background: rgba(20, 20, 40, 0.85);
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .projects-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #6ee7b7;
+      text-align: center;
+      letter-spacing: 1.5px;
+      animation: moveUp 0.7s 0.8s both;
+    }
+    .projects-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2vw;
+      justify-content: center;
+    }
+    .project-card {
+      background: linear-gradient(135deg, #232526 60%, #6ee7b7 200%);
+      border-radius: 22px;
+      box-shadow: 0 8px 40px 0 #0003;
+      padding: 2rem 1.5rem;
+      width: 300px;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      opacity: 0;
+      transform: translateY(40px) scale(0.98);
+      animation: cardIn 0.6s cubic-bezier(.77,0,.18,1) both;
+    }
+    .project-card:nth-child(1) { animation-delay: 1.0s;}
+    .project-card:nth-child(2) { animation-delay: 1.2s;}
+    .project-card:nth-child(3) { animation-delay: 1.4s;}
+    .project-card:nth-child(4) { animation-delay: 1.6s;}
+    @keyframes cardIn {
+      to { opacity: 1; transform: translateY(0) scale(1);}
+    }
+    .project-title {
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 0.7rem;
+      letter-spacing: 1px;
+    }
+    .project-desc {
+      font-size: 1rem;
+      color: #e0e0e0;
+      margin-bottom: 1.2rem;
+    }
+    .project-link {
+      color: #1e293b;
+      background: #6ee7b7;
+      padding: 0.5rem 1.2rem;
+      border-radius: 16px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .project-link:hover {
+      background: #3b82f6;
+      color: #fff;
+    }
+    /* Decorative animated bubbles (reduced for performance) */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.18;
+      pointer-events: none;
+      z-index: 1;
+      animation: floatBubble 10s infinite linear;
+    }
+    @keyframes floatBubble {
+      from { transform: translateY(0) scale(1);}
+      to { transform: translateY(-100vh) scale(1.15);}
+    }
+    @media (max-width: 900px) {
+      .hero { flex-direction: column; text-align: center; }
+      .hero-content { max-width: 100%; }
+      .projects-list { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Byteweave Studio india</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#projects">Projects</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Innovative Digital Experiences</h1>
+      <p>Explore our latest demo projects that blend creativity, technology, and seamless user experience. Crafted by Byteweave Studio India.</p>
+      <a href="#projects" class="cta-btn">View Projects</a>
+    </div>
+  </section>
+
+  <section class="projects-section" id="projects">
+    <div class="projects-title">Demo Projects</div>
+    <div class="projects-list">
+      <div class="project-card">
+        <div class="project-title">Cafe Web</div>
+        <div class="project-desc">A stylish, animated cafe website template with menu showcase and reservation features.</div>
+        <a class="project-link" href="https://byteweavestudio.vercel.app/demo/templates/procafe/index.html" target="_blank">View Demo</a>
+      </div>
+      <div class="project-card">
+        <div class="project-title">Gym Website</div>
+        <div class="project-desc">A dynamic gym web template with class schedules, trainer profiles, and animated transitions.</div>
+        <a class="project-link" href="https://byteweavestudio.vercel.app/demo/templates/gym1/index.html" target="_blank">View Demo</a>
+      </div>
+      <div class="project-card">
+        <div class="project-title">Cake Shop</div>
+        <div class="project-desc">A delightful cake shop demo featuring animated galleries and product highlights.</div>
+        <a class="project-link" href="https://byteweavestudio.vercel.app/demo/templates/cake1/index.html" target="_blank">View Demo</a>
+      </div>
+      <div class="project-card">
+        <div class="project-title">Coaching Class</div>
+        <div class="project-desc">A modern coaching class website template with course listings and engaging animations.</div>
+        <a class="project-link" href="https://byteweavestudio.vercel.app/demo/templates/index.html" target="_blank">View Demo</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Decorative animated bubbles for background (reduced for performance)
+    function createBubbles() {
+      const colors = ['#6ee7b7', '#3b82f6', '#fff', '#a5b4fc'];
+      for (let i = 0; i < 7; i++) { // Reduced number for smoother performance
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        const size = Math.random() * 40 + 30;
+        bubble.style.width = `${size}px`;
+        bubble.style.height = `${size}px`;
+        bubble.style.left = `${Math.random() * 100}%`;
+        bubble.style.bottom = `-${Math.random() * 40 + 10}px`;
+        bubble.style.background = colors[Math.floor(Math.random() * colors.length)];
+        bubble.style.animationDuration = `${7 + Math.random() * 5}s`;
+        bubble.style.animationDelay = `${Math.random() * 5}s`;
+        document.body.appendChild(bubble);
+      }
+    }
+    createBubbles();
+  </script>
+</body>
+</html>
