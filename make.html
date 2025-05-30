@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Contact Us</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #ece9f7 0%, #d9afd9 100%);
+      font-family: 'Roboto', sans-serif;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .contact-container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+      padding: 40px 30px;
+      width: 350px;
+      animation: fadeIn 1s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(40px);}
+      to   { opacity: 1; transform: translateY(0);}
+    }
+    h2 {
+      text-align: center;
+      color: #6a3093;
+      margin-bottom: 30px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+    .section {
+      margin-bottom: 25px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .contact-btn {
+      background: linear-gradient(90deg, #6a3093 0%, #a044ff 100%);
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+      box-shadow: 0 4px 16px rgba(160, 68, 255, 0.15);
+      outline: none;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .contact-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 24px rgba(160, 68, 255, 0.25);
+      background: linear-gradient(90deg, #a044ff 0%, #6a3093 100%);
+    }
+    .icon {
+      font-size: 1.3em;
+      vertical-align: middle;
+    }
+    @media (max-width: 480px) {
+      .contact-container {
+        width: 95vw;
+        padding: 20px 5vw;
+      }
+      h2 { font-size: 1.4em; }
+    }
+  </style>
+  <!-- Font Awesome for icons -->
+  <script src="https://kit.fontawesome.com/8c7e6e6f2d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="contact-container">
+    <h2>Contact Us</h2>
+    <!-- Section 1: Make a Call -->
+    <div class="section">
+      <span>Prefer to talk?</span>
+      <a href="tel:9699957917">
+        <button class="contact-btn">
+          <i class="fas fa-phone icon"></i>
+          Make a Call
+        </button>
+      </a>
+    </div>
+    <!-- Section 2: WhatsApp -->
+    <div class="section">
+      <span>Or chat with us on WhatsApp!</span>
+      <a href="https://wa.me/9699957917" target="_blank">
+        <button class="contact-btn" style="background:linear-gradient(90deg,#25D366 0%,#128C7E 100%);">
+          <i class="fab fa-whatsapp icon"></i>
+          Chat on WhatsApp
+        </button>
+      </a>
+    </div>
+  </div>
+</body>
+</html>
