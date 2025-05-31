@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DreamHome Real Estate</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: #f5f7fa;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(to right, #004080, #0074d9);
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    nav a {
+      color: #fff;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+    }
+    nav a::after {
+      content: "";
+      height: 2px;
+      background: white;
+      position: absolute;
+      width: 0%;
+      left: 0;
+      bottom: -4px;
+      transition: 0.3s;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    .section {
+      padding: 120px 20px 60px;
+      opacity: 0;
+      transform: translateY(100px);
+      transition: all 0.8s ease-out;
+    }
+    .section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero {
+      background: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-shadow: 1px 1px 4px black;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.5rem;
+    }
+    h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .property-card {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .card {
+      width: 320px;
+      background-color: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.4s ease;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card-body {
+      padding: 15px;
+    }
+    .card-body h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .dealer-profiles {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .dealer-card {
+      width: 250px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .dealer-card:hover {
+      transform: scale(1.05);
+    }
+    .dealer-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+    form {
+      max-width: 500px;
+      margin: auto;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    form button {
+      background: #004080;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    form button:hover {
+      background: #0066cc;
+    }
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 30px 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>DreamHome</h1>
+    <nav>
+      <a href="#hero">Home</a>
+      <a href="#properties">Properties</a>
+      <a href="#about">About Us</a>
+      <a href="#dealer">Dealers</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="hero" class="hero section">
+    <div>
+      <h1>Your Dream Home Awaits</h1>
+      <p>Explore the finest properties with us today.</p>
+    </div>
+  </section>
+
+  <section id="properties" class="section">
+    <h2>Featured Properties</h2>
+    <div class="property-card">
+      <div class="card">
+        <img src="house1.png" alt="Modern House">
+        <div class="card-body">
+          <h3>Elegant Family House</h3>
+          <p>4 Bed • 3 Bath • 3200 sqft</p>
+          <p><strong>$1,250,000</strong></p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914" alt="Beach House">
+        <div class="card-body">
+          <h3>Beachfront Villa</h3>
+          <p>3 Bed • 2 Bath • Ocean View</p>
+          <p><strong>$2,100,000</strong></p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be" alt="Penthouse">
+        <div class="card-body">
+          <h3>City Penthouse</h3>
+          <p>2 Bed • 2 Bath • Skyline View</p>
+          <p><strong>$950,000</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <h2>About Us</h2>
+    <p style="max-width: 800px; margin: auto; text-align: center;">DreamHome is a premium real estate agency offering a wide range of residential and commercial properties. We focus on personalized service and long-term client satisfaction.</p>
+  </section>
+
+  <section id="dealer" class="section">
+    <h2>Our Dealers</h2>
+    <div class="dealer-profiles">
+      <div class="dealer-card">
+        <img src="https://randomuser.me/api/portraits/men/10.jpg" alt="Agent">
+        <h4>James Carter</h4>
+        <p>Real Estate Broker</p>
+        <p>Experience: 12 years</p>
+        <p>Email: james@dreamhome.com</p>
+      </div>
+      <div class="dealer-card">
+        <img src="https://randomuser.me/api/portraits/women/5.jpg" alt="Agent">
+        <h4>Emily Watson</h4>
+        <p>Luxury Specialist</p>
+        <p>Experience: 9 years</p>
+        <p>Email: emily@dreamhome.com</p>
+      </div>
+      <div class="dealer-card">
+        <img src="https://randomuser.me/api/portraits/men/6.jpg" alt="Agent">
+        <h4>Ryan Lee</h4>
+        <p>Property Advisor</p>
+        <p>Experience: 7 years</p>
+        <p>Email: ryan@dreamhome.com</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 DreamHome Real Estate. Designed with style and trust.</p>
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('.section');
+    window.addEventListener('scroll', () => {
+      const trigger = window.innerHeight / 1.2;
+      sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        if (top < trigger) {
+          section.classList.add('show');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

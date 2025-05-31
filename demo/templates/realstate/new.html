@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DreamHome Real Estate</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      scroll-behavior: smooth;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: linear-gradient(to bottom, #f0f4f8, #e2eafc);
+      color: #333;
+    }
+    header {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    nav a {
+      color: #fff;
+      margin: 0 1rem;
+      text-decoration: none;
+      font-weight: 600;
+      position: relative;
+    }
+    nav a::after {
+      content: "";
+      height: 2px;
+      background: white;
+      position: absolute;
+      width: 0%;
+      left: 0;
+      bottom: -4px;
+      transition: 0.3s;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    .section {
+      padding: 120px 20px 80px;
+      opacity: 0;
+      transform: translateY(100px);
+      transition: all 0.8s ease-out;
+    }
+    .section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .hero {
+      background: url('https://images.unsplash.com/photo-1599423300746-b62533397364') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-shadow: 1px 1px 5px rgba(0,0,0,0.8);
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      animation: fadeInDown 1s ease forwards;
+    }
+    .hero p {
+      font-size: 1.5rem;
+      animation: fadeInUp 1s ease forwards;
+    }
+    @keyframes fadeInDown {
+      0% {opacity: 0; transform: translateY(-20px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInUp {
+      0% {opacity: 0; transform: translateY(20px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+    h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #004080;
+    }
+    .property-card, .dealer-profiles {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+    .card {
+      width: 320px;
+      background-color: #fff;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+      transition: transform 0.4s ease, box-shadow 0.4s;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 20px rgba(0,0,0,0.25);
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card-body {
+      padding: 15px;
+    }
+    .card-body h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #0074d9;
+    }
+    .dealer-card {
+      width: 250px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .dealer-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+    .dealer-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+    form {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    form button {
+      background: #004080;
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    form button:hover {
+      background: #0066cc;
+    }
+    footer {
+      background: #001f3f;
+      color: #fff;
+      text-align: center;
+      padding: 30px 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>DreamHome</h1>
+    <nav>
+      <a href="#hero">Home</a>
+      <a href="#properties">Properties</a>
+      <a href="#about">About Us</a>
+      <a href="#dealer">Dealers</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="hero" class="hero section">
+    <div>
+      <h1>Find Your Perfect Property</h1>
+      <p>Luxury apartments, family homes, and more — just a click away.</p>
+    </div>
+  </section>
+
+  <section id="properties" class="section">
+    <h2>Featured Properties</h2>
+    <div class="property-card">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1600585152846-84d3800d1c4d" alt="Modern House">
+        <div class="card-body">
+          <h3>Elegant Family House</h3>
+          <p>4 Bed • 3 Bath • 3200 sqft</p>
+          <p><strong>$1,250,000</strong></p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914" alt="Beach House">
+        <div class="card-body">
+          <h3>Beachfront Villa</h3>
+          <p>3 Bed • 2 Bath • Ocean View</p>
+          <p><strong>$2,100,000</strong></p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be" alt="Penthouse">
+        <div class="card-body">
+          <h3>City Penthouse</h3>
+          <p>2 Bed • 2 Bath • Skyline View</p>
+          <p><strong>$950,000</strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <h2>About Us</h2>
+    <p style="max-width: 800px; margin: auto; text-align: center;">DreamHome is a luxury real estate brand offering access to the most exclusive properties across the country. Our expert agents specialize in understanding your unique vision and delivering homes that go beyond expectations.</p>
+  </section>
+
+  <section id="dealer" class="section">
+    <h2>Meet Our Expert Dealers</h2>
+    <div class="dealer-profiles">
+      <div class="dealer-card">
+        <img src="https://randomuser.me/api/portraits/men/10.jpg" alt="Agent">
+        <h4>James Carter</h4>
+        <p>Real Estate Broker</p>
+        <p>12 Years Experience</p>
+        <p>Email: james@dreamhome.com</p>
+      </div>
+      <div class="dealer-card">
+        <img src="https://randomuser.me/api/portraits/women/5.jpg" alt="Agent">
+        <h4>Emily Watson</h4>
+        <p>Luxury Specialist</p>
+        <p>9 Years Experience</p>
+        <p>Email: emily@dreamhome.com</p>
+      </div>
+      <div class="dealer-card">
+        <img src="https://randomuser.me/api/portraits/men/6.jpg" alt="Agent">
+        <h4>Ryan Lee</h4>
+        <p>Property Advisor</p>
+        <p>7 Years Experience</p>
+        <p>Email: ryan@dreamhome.com</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Contact Us</h2>
+    <form>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 DreamHome Real Estate | Designed with passion for perfection</p>
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('.section');
+    window.addEventListener('scroll', () => {
+      const trigger = window.innerHeight / 1.3;
+      sections.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        if (top < trigger) {
+          section.classList.add('show');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
