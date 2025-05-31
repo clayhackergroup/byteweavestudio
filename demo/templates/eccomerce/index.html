@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ShopEase - Your Online Store</title>
+<style>
+  /* Reset */
+  * {
+    box-sizing: border-box;
+  }
+  body, h1, h2, h3, p, ul, li, a, button {
+    margin: 0; padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  body {
+    background: #f9fafb;
+    color: #333;
+    line-height: 1.5;
+  }
+  a {
+    color: #ff6f61;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Header and Nav */
+  header {
+    position: sticky;
+    top: 0;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    z-index: 100;
+  }
+  .navbar {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    justify-content: space-between;
+  }
+  .logo {
+    font-weight: 900;
+    font-size: 28px;
+    color: #ff6f61;
+    letter-spacing: 2px;
+    cursor: pointer;
+    user-select: none;
+  }
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+  }
+  nav ul li {
+    font-weight: 600;
+  }
+  nav ul li a {
+    font-size: 16px;
+    transition: color 0.3s ease;
+  }
+  nav ul li a:hover {
+    color: #e65c50;
+  }
+
+  /* Basket */
+  .basket {
+    position: relative;
+    cursor: pointer;
+    font-size: 18px;
+    color: #ff6f61;
+  }
+  .basket-icon {
+    font-size: 24px;
+    vertical-align: middle;
+  }
+  .basket-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: #ff3b2e;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    user-select: none;
+  }
+
+  /* Basket dropdown preview */
+  .basket-preview {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 32px;
+    width: 280px;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    padding: 15px;
+    z-index: 150;
+  }
+  .basket:hover .basket-preview {
+    display: block;
+  }
+  .basket-preview h4 {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #444;
+  }
+  .basket-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 15px;
+  }
+  .basket-item:last-child {
+    margin-bottom: 0;
+  }
+  .basket-total {
+    font-weight: 700;
+    font-size: 16px;
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-top: 10px;
+    text-align: right;
+  }
+
+  /* Main container */
+  main {
+    max-width: 1200px;
+    margin: 40px auto 80px;
+    padding: 0 15px;
+  }
+
+  /* Section headings */
+  section h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #222;
+    border-bottom: 3px solid #ff6f61;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+
+  /* Carousel container */
+  .carousel-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Carousel */
+  .carousel {
+    display: flex;
+    gap: 20px;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    padding-bottom: 10px;
+  }
+  .carousel::-webkit-scrollbar {
+    height: 8px;
+  }
+  .carousel::-webkit-scrollbar-thumb {
+    background: #ff6f61;
+    border-radius: 4px;
+  }
+
+  /* Product card */
+  .product-card {
+    flex: 0 0 220px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.07);
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+  }
+  .product-card:hover {
+    transform: translateY(-10px) scale(1.07);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    z-index: 10;
+  }
+
+  /* Image zoom effect */
+  .product-image-container {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+  }
+  .product-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+  }
+  .product-card:hover .product-image-container img {
+    transform: scale(1.15);
+  }
+
+  /* Product info */
+  .product-info {
+    padding: 15px 15px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .product-name {
+    font-weight: 600;
+    font-size: 16px;
+    color: #222;
+    margin-bottom: 8px;
+  }
+  .product-price {
+    font-weight: 700;
+    font-size: 18px;
+    color: #ff6f61;
+    margin-bottom: 12px;
+  }
+  .add-btn {
+    background: #ff6f61;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 12px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .add-btn:hover:not(:disabled) {
+    background: #e65c50;
+  }
+  .add-btn:disabled {
+    background: #ffb4ac;
+    cursor: not-allowed;
+  }
+
+  /* Scroll Buttons */
+  .scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ff6f61;
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    user-select: none;
+    transition: background 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 5px 15px rgba(255,111,97,0.6);
+    z-index: 5;
+  }
+  .scroll-btn:hover {
+    background: #e65c50;
+  }
+  .scroll-left {
+    left: 0;
+  }
+  .scroll-right {
+    right: 0;
+  }
+
+  /* About, Contact Sections */
+  section.about-us, section.contact-us {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+    margin-top: 60px;
+  }
+  section.about-us p, section.contact-us p {
+    font-size: 17px;
+    margin-bottom: 15px;
+    color: #444;
+  }
+
+  /* Contact form */
+  form.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+  }
+  form.contact-form label {
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+  form.contact-form input, form.contact-form textarea {
+    padding: 10px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1.5px solid #ddd;
+    resize: vertical;
+    transition: border-color 0.3s ease;
+  }
+  form.contact-form input:focus, form.contact-form textarea:focus {
+    border-color: #ff6f61;
+    outline: none;
+  }
+  form.contact-form button {
+    background: #ff6f61;
+    color: white;
+    padding: 12px;
+    font-weight: 700;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+  }
+  form.contact-form button:hover {
+    background: #e65c50;
+  }
+
+  /* Footer */
+  footer {
+    background: #222;
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+  }
+  footer p {
+    font-size: 15px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .carousel-container {
+      margin-bottom: 40px;
+    }
+    nav ul {
+      gap: 15px;
+      font-size: 14px;
+    }
+    .product-card {
+      flex: 0 0 160px;
+    }
+  }
+  @media (max-width: 480px) {
+    nav ul {
+      display: none; /* Hide nav on small devices */
+    }
+    .carousel {
+      gap: 15px;
+    }
+    .product-card {
+      flex: 0 0 140px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="navbar">
+    <div class="logo">ShopEase</div>
+    <nav>
+      <ul>
+        <li><a href="#products">Products</a></li>
+        <li><a href="#aboutus">About Us</a></li>
+        <li><a href="#contactus">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="basket" title="Your Basket" tabindex="0" aria-label="Shopping Basket">
+      <span class="basket-icon">🛒</span>
+      <span class="basket-count" id="basket-count">0</span>
+
+      <div class="basket-preview" id="basket-preview" aria-live="polite">
+        <h4>Your Basket</h4>
+        <div id="basket-items">
+          <p>Your basket is empty.</p>
+        </div>
+        <div class="basket-total" id="basket-total"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="products" aria-label="Product Listings">
+    <h2>🔥 Trending Products</h2>
+    <div class="carousel-container">
+      <button class="scroll-btn scroll-left" aria-label="Scroll Products Left">&#8249;</button>
+      <div class="carousel" id="product-carousel" tabindex="0">
+        <!-- Products rendered by JS -->
+      </div>
+      <button class="scroll-btn scroll-right" aria-label="Scroll Products Right">&#8250;</button>
+    </div>
+  </section>
+
+  <section id="aboutus" class="about-us" aria-label="About Us Section">
+    <h2>About ShopEase</h2>
+    <p>Welcome to ShopEase, your one-stop destination for the latest and greatest in electronics, gadgets, and accessories. We are committed to providing you with top-quality products at competitive prices, backed by excellent customer service.</p>
+    <p>Our mission is to bring convenience and joy to your shopping experience through a modern, user-friendly platform packed with the best products available online.</p>
+  </section>
+
+  <section id="contactus" class="contact-us" aria-label="Contact Us Section">
+    <h2>Contact Us</h2>
+    <p>Have questions, feedback, or need assistance? Reach out to us anytime. We’re here to help!</p>
+    <form class="contact-form" id="contact-form" aria-label="Contact Form">
+      <label for="name">Name *</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required aria-required="true" />
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" placeholder="your.email@example.com" required aria-required="true" />
+      <label for="message">Message *</label>
+      <textarea id="message" name="message" rows="4" placeholder="Write your message here..." required aria-required="true"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 ShopEase. All rights reserved.</p>
+</footer>
+
+<script>
+  const products = [
+    {
+      id: 101,
+      name: "Wireless Bluetooth Headphones",
+      price: 79.99,
+      image: "headphones.png"
+    },
+    {
+      id: 102,
+      name: "Smart Fitness Watch",
+      price: 149.99,
+      image: "fitwatch.png"
+    },
+    {
+      id: 103,
+      name: "DSLR Camera",
+      price: 499.99,
+      image: "dslr.png"
+    },
+    {
+      id: 104,
+      name: "Ergonomic Gaming Mouse",
+      price: 59.99,
+      image: "mouse.png"
+    },
+    {
+      id: 105,
+      name: "Portable Bluetooth Speaker",
+      price: 89.99,
+      image: "speaker.png"
+    },
+    {
+      id: 106,
+      name: "Smartphone with AMOLED Display",
+      price: 699.99,
+      image: "mobile.png"
+    },
+    {
+      id: 107,
+      name: "Noise Cancelling Earbuds",
+      price: 129.99,
+      image: "earbuds.png"
+    },
+    {
+      id: 108,
+      name: "VR Headset",
+      price: 349.99,
+      image: "vr.png"
+    },
+    {
+      id: 109,
+      name: "Wireless Charging Pad",
+      price: 39.99,
+      image: "wirelesscharging.png"
+    },
+    {
+      id: 110,
+      name: "4K Action Camera",
+      price: 179.99,
+      image: "4kcamera.png"
+    }
+  ];
+
+  const carousel = document.getElementById('product-carousel');
+  const basketCount = document.getElementById('basket-count');
+  const basketItemsContainer = document.getElementById('basket-items');
+  const basketTotalDisplay = document.getElementById('basket-total');
+
+  let basket = {};
+
+  // Render product cards
+  function renderProducts() {
+    carousel.innerHTML = '';
+    products.forEach(product => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      card.setAttribute('tabindex', '0');
+      card.innerHTML = `
+        <div class="product-image-container">
+          <img src="${product.image}" alt="${product.name}" />
+        </div>
+        <div class="product-info">
+          <div>
+            <div class="product-name">${product.name}</div>
+            <div class="product-price">$${product.price.toFixed(2)}</div>
+          </div>
+          <button class="add-btn" data-id="${product.id}" aria-label="Add ${product.name} to basket">Add to Basket</button>
+        </div>
+      `;
+      carousel.appendChild(card);
+    });
+  }
+
+  // Add to basket functionality
+  function addToBasket(productId) {
+    if (basket[productId]) {
+      basket[productId]++;
+    } else {
+      basket[productId] = 1;
+    }
+    updateBasketCount();
+    updateBasketPreview();
+  }
+
+  // Update basket count
+  function updateBasketCount() {
+    const count = Object.values(basket).reduce((a,b) => a + b, 0);
+    basketCount.textContent = count;
+  }
+
+  // Update basket preview dropdown
+  function updateBasketPreview() {
+    basketItemsContainer.innerHTML = '';
+    const keys = Object.keys(basket);
+    if (keys.length === 0) {
+      basketItemsContainer.innerHTML = '<p>Your basket is empty.</p>';
+      basketTotalDisplay.textContent = '';
+      return;
+    }
+    let total = 0;
+    keys.forEach(id => {
+      const product = products.find(p => p.id == id);
+      const quantity = basket[id];
+      const price = product.price * quantity;
+      total += price;
+
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'basket-item';
+      itemDiv.textContent = `${product.name} x${quantity}`;
+      const priceSpan = document.createElement('span');
+      priceSpan.textContent = `$${price.toFixed(2)}`;
+      itemDiv.appendChild(priceSpan);
+
+      basketItemsContainer.appendChild(itemDiv);
+    });
+    basketTotalDisplay.textContent = `Total: $${total.toFixed(2)}`;
+  }
+
+  // Scroll buttons
+  const scrollLeftBtn = document.querySelector('.scroll-left');
+  const scrollRightBtn = document.querySelector('.scroll-right');
+
+  scrollLeftBtn.addEventListener('click', () => {
+    carousel.scrollBy({ left: -300, behavior: 'smooth' });
+  });
+  scrollRightBtn.addEventListener('click', () => {
+    carousel.scrollBy({ left: 300, behavior: 'smooth' });
+  });
+
+  // Event delegation for Add to Basket buttons
+  carousel.addEventListener('click', e => {
+    if (e.target.classList.contains('add-btn')) {
+      const id = e.target.getAttribute('data-id');
+      addToBasket(id);
+    }
+  });
+
+  // Contact form submission (dummy)
+  const contactForm = document.getElementById('contact-form');
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+    alert('Thank you for contacting us! We will get back to you soon.');
+    contactForm.reset();
+  });
+
+  renderProducts();
+  updateBasketCount();
+  updateBasketPreview();
+
+</script>
+
+</body>
+</html>
