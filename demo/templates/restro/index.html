@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gourmet Haven - Fine Dining Experience</title>
+  
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet" />
+  
+  <style>
+    /* Reset & base */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background: #fff;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+      border-radius: 8px;
+    }
+    button {
+      cursor: pointer;
+      border: none;
+      background: #e63946;
+      color: white;
+      padding: 12px 24px;
+      font-weight: 600;
+      border-radius: 30px;
+      transition: background 0.3s ease;
+    }
+    button:hover, button:focus {
+      background: #d62828;
+      outline: none;
+    }
+    section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h2.section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      font-weight: 700;
+      font-size: 2.5rem;
+      color: #1d3557;
+    }
+    /* Hero Section */
+    #hero {
+      position: relative;
+      height: 100vh;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    #hero video,
+    #hero .overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+    #hero .overlay {
+      background: rgba(0,0,0,0.5);
+      z-index: -1;
+    }
+    #hero h1 {
+      font-size: 4rem;
+      font-weight: 900;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      margin-bottom: 10px;
+    }
+    #hero p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      font-weight: 300;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+    }
+    #hero .btn-group button {
+      margin: 0 10px;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 10px rgba(230, 57, 70, 0.4);
+    }
+    #hero .scroll-down {
+      position: absolute;
+      bottom: 20px;
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+      color: white;
+      cursor: pointer;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(15px); }
+    }
+
+    /* About Us */
+    #about p {
+      max-width: 800px;
+      margin: 0 auto 30px auto;
+      font-size: 1.1rem;
+      color: #555;
+    }
+    #about .mission-vision {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 30px;
+    }
+    #about .mv-card {
+      background: #f1f1f1;
+      padding: 30px;
+      border-radius: 12px;
+      flex: 1 1 300px;
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.05);
+      transition: transform 0.3s ease;
+    }
+    #about .mv-card:hover {
+      transform: translateY(-10px);
+    }
+    #about .mv-card h3 {
+      margin-bottom: 15px;
+      color: #e63946;
+    }
+    #about .mv-card p {
+      font-weight: 400;
+      color: #444;
+    }
+
+    /* Menu */
+    #menu .menu-categories {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    #menu .menu-categories button {
+      background: #f1f1f1;
+      color: #333;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: 600;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    #menu .menu-categories button.active,
+    #menu .menu-categories button:hover {
+      background: #e63946;
+      color: white;
+      border-color: #e63946;
+    }
+    #menu .menu-items {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 30px;
+    }
+    #menu .menu-item {
+      background: #fafafa;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgb(0 0 0 / 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease;
+    }
+    #menu .menu-item:hover {
+      transform: translateY(-10px);
+    }
+    #menu .menu-item img {
+      height: 180px;
+      object-fit: cover;
+    }
+    #menu .menu-item-content {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    #menu .menu-item-content h4 {
+      margin-bottom: 10px;
+      color: #1d3557;
+    }
+    #menu .menu-item-content p {
+      flex-grow: 1;
+      color: #555;
+      font-size: 0.95rem;
+      margin-bottom: 15px;
+    }
+    #menu .menu-item-content .price {
+      font-weight: 700;
+      color: #e63946;
+      font-size: 1.1rem;
+    }
+
+    /* Gallery */
+    #gallery .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+      gap: 15px;
+    }
+    #gallery .gallery-grid img {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+    }
+    #gallery .gallery-grid img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Lightbox */
+    #lightbox {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    #lightbox img {
+      max-width: 90%;
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(255,255,255,0.3);
+    }
+    #lightbox:target {
+      display: flex;
+    }
+    #lightbox .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2.5rem;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+      user-select: none;
+    }
+
+    /* Chefs */
+    #chefs .chef-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+    }
+    #chefs .chef-card {
+      flex: 1 1 250px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgb(0 0 0 / 0.08);
+      border-radius: 15px;
+      overflow: hidden;
+      background: #fff;
+      transition: transform 0.3s ease;
+    }
+    #chefs .chef-card:hover {
+      transform: translateY(-10px);
+    }
+    #chefs .chef-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-bottom: 4px solid #e63946;
+      border-radius: 15px 15px 0 0;
+      transition: border-color 0.3s ease;
+    }
+    #chefs .chef-card:hover img {
+      border-color: #d62828;
+    }
+    #chefs .chef-info {
+      padding: 20px;
+    }
+    #chefs .chef-info h4 {
+      margin-bottom: 5px;
+      color: #1d3557;
+    }
+    #chefs .chef-info p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    /* Kitchen */
+    #kitchen .kitchen-photos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 25px;
+    }
+    #kitchen .kitchen-photos img {
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgb(0 0 0 / 0.1);
+      transition: transform 0.3s ease;
+    }
+    #kitchen .kitchen-photos img:hover {
+      transform: scale(1.05);
+    }
+    #kitchen .video-wrapper {
+      max-width: 700px;
+      margin: 40px auto 0 auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgb(0 0 0 / 0.15);
+    }
+    #kitchen video {
+      width: 100%;
+      display: block;
+    }
+
+    /* Owner */
+    #owner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      align-items: center;
+      justify-content: center;
+    }
+    #owner img {
+      border-radius: 50%;
+      width: 220px;
+      height: 220px;
+      object-fit: cover;
+      box-shadow: 0 4px 15px rgb(0 0 0 / 0.1);
+      flex-shrink: 0;
+    }
+    #owner .owner-bio {
+      flex: 1 1 400px;
+      color: #444;
+    }
+    #owner .owner-bio h3 {
+      margin-bottom: 15px;
+      color: #e63946;
+    }
+    #owner .owner-bio p {
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    /* Location */
+    #location iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgb(0 0 0 / 0.15);
+    }
+    #location .address {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    /* Contact */
+    #contact form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    #contact label {
+      font-weight: 600;
+      color: #1d3557;
+    }
+    #contact input, #contact textarea {
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 2px solid #ccc;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      resize: vertical;
+    }
+    #contact input:focus, #contact textarea:focus {
+      border-color: #e63946;
+      outline: none;
+    }
+    #contact button {
+      align-self: center;
+      width: 150px;
+    }
+    #contact .info {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 1rem;
+      color: #555;
+    }
+
+    /* Footer */
+    footer {
+      background: #1d3557;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      position: relative;
+    }
+    footer .social-links {
+      margin-bottom: 20px;
+    }
+    footer .social-links a {
+      margin: 0 10px;
+      font-size: 1.5rem;
+      color: white;
+      transition: color 0.3s ease;
+    }
+    footer .social-links a:hover {
+      color: #e63946;
+    }
+    footer small {
+      display: block;
+      margin-top: 10px;
+      font-weight: 300;
+    }
+    footer .newsletter {
+      margin-top: 20px;
+    }
+    footer .newsletter input[type="email"] {
+      padding: 10px 15px;
+      border-radius: 30px 0 0 30px;
+      border: none;
+      width: 250px;
+      max-width: 80vw;
+      font-size: 1rem;
+    }
+    footer .newsletter button {
+      border-radius: 0 30px 30px 0;
+      padding: 10px 20px;
+      background: #e63946;
+      border: none;
+      color: white;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    footer .newsletter button:hover {
+      background: #d62828;
+    }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+      #hero h1 {
+        font-size: 2.8rem;
+      }
+      #hero p {
+        font-size: 1.1rem;
+      }
+      #about .mission-vision {
+        flex-direction: column;
+        gap: 20px;
+      }
+      #owner {
+        flex-direction: column;
+      }
+      #owner img {
+        width: 180px;
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section id="hero" aria-label="Hero Section">
+    <video autoplay muted loop playsinline>
+      <source src="https://cdn.pixabay.com/vimeo/458987610/food-restaurant-458987610.mp4" type="video/mp4" />
+      <!-- Fallback image -->
+    </video>
+    <div class="overlay"></div>
+    <h1 data-aos="fade-down" data-aos-duration="1500">Gourmet Haven</h1>
+    <p data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300">Fine Dining Experience in the Heart of the City</p>
+    <div class="btn-group" data-aos="zoom-in" data-aos-delay="600" data-aos-duration="1000">
+      <button onclick="alert('Redirect to reservation page')">Reserve Now</button>
+      <button onclick="alert('Redirect to online ordering')">Order Online</button>
+    </div>
+    <div class="scroll-down" role="button" tabindex="0" aria-label="Scroll Down" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})" onkeypress="if(event.key==='Enter'){document.getElementById('about').scrollIntoView({behavior:'smooth'})}">&#x25BC;</div>
+  </section>
+
+  <!-- About Us -->
+  <section id="about" aria-label="About Us">
+    <h2 class="section-title" data-aos="fade-up">About Us</h2>
+    <p data-aos="fade-up" data-aos-delay="200">
+      Founded in 2010, Gourmet Haven has been delivering exquisite culinary experiences combining classic techniques with modern flavors. Our passion for quality ingredients and exceptional service has made us a favorite destination for food lovers.
+    </p>
+    <div class="mission-vision">
+      <div class="mv-card" data-aos="fade-right" data-aos-delay="400">
+        <h3>Our Mission</h3>
+        <p>To provide an unforgettable dining experience through innovative cuisine and warm hospitality.</p>
+      </div>
+      <div class="mv-card" data-aos="fade-left" data-aos-delay="400">
+        <h3>Our Vision</h3>
+        <p>To be recognized as the city’s premier fine dining restaurant, inspiring culinary excellence.</p>
+      </div>
+      <div class="mv-card" data-aos="fade-up" data-aos-delay="600">
+        <h3>Cuisine</h3>
+        <p>We specialize in contemporary fusion cuisine, blending local and international flavors.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu -->
+  <section id="menu" aria-label="Menu">
+    <h2 class="section-title" data-aos="fade-up">Our Menu</h2>
+    <div class="menu-categories" role="tablist" aria-label="Menu Categories">
+      <button class="active" role="tab" aria-selected="true" aria-controls="starters" id="tab-starters">Starters</button>
+      <button role="tab" aria-selected="false" aria-controls="main-course" id="tab-main">Main Course</button>
+      <button role="tab" aria-selected="false" aria-controls="drinks" id="tab-drinks">Drinks</button>
+      <button role="tab" aria-selected="false" aria-controls="desserts" id="tab-desserts">Desserts</button>
+    </div>
+    <div id="starters" class="menu-items" role="tabpanel" aria-labelledby="tab-starters" data-aos="fade-up">
+      <article class="menu-item" tabindex="0">
+        <img src="tomatot.png" alt="Bruschetta" />
+        <div class="menu-item-content">
+          <h4>Bruschetta</h4>
+          <p>Grilled bread topped with fresh tomatoes, basil and olive oil.</p>
+          <div class="price">$8</div>
+        </div>
+      </article>
+      <article class="menu-item" tabindex="0">
+        <img src="StuffedMushrooms.png" alt="Stuffed Mushrooms" />
+        <div class="menu-item-content">
+          <h4>Stuffed Mushrooms</h4>
+          <p>Mushrooms filled with cheese, herbs and breadcrumbs, baked to perfection.</p>
+          <div class="price">$10</div>
+        </div>
+      </article>
+    </div>
+    <div id="main-course" class="menu-items" role="tabpanel" aria-labelledby="tab-main" hidden>
+      <article class="menu-item" tabindex="0">
+        <img src="GrilledSalmon.png" alt="Grilled Salmon" />
+        <div class="menu-item-content">
+          <h4>Grilled Salmon</h4>
+          <p>Fresh salmon grilled with lemon butter sauce and seasonal vegetables.</p>
+          <div class="price">$22</div>
+        </div>
+      </article>
+      <article class="menu-item" tabindex="0">
+        <img src="RibeyeSteak.png" alt="Steak" />
+        <div class="menu-item-content">
+          <h4>Ribeye Steak</h4>
+          <p>Juicy ribeye steak cooked to your liking with garlic mashed potatoes.</p>
+          <div class="price">$28</div>
+        </div>
+      </article>
+    </div>
+    <div id="drinks" class="menu-items" role="tabpanel" aria-labelledby="tab-drinks" hidden>
+      <article class="menu-item" tabindex="0">
+        <img src="RedWine.png" alt="Red Wine" />
+        <div class="menu-item-content">
+          <h4>Red Wine</h4>
+          <p>Glass of premium red wine from local vineyards.</p>
+          <div class="price">$12</div>
+        </div>
+      </article>
+      <article class="menu-item" tabindex="0">
+        <img src="ClassicMojito.png" />
+        <div class="menu-item-content">
+          <h4>Classic Mojito</h4>
+          <p>Refreshing cocktail with rum, mint, lime and soda.</p>
+          <div class="price">$14</div>
+        </div>
+      </article>
+    </div>
+    <div id="desserts" class="menu-items" role="tabpanel" aria-labelledby="tab-desserts" hidden>
+      <article class="menu-item" tabindex="0">
+        <img src="NewYorkCheesecake.png" alt="Cheesecake" />
+        <div class="menu-item-content">
+          <h4>New York Cheesecake</h4>
+          <p>Creamy cheesecake with a graham cracker crust and berry topping.</p>
+          <div class="price">$9</div>
+        </div>
+      </article>
+      <article class="menu-item" tabindex="0">
+        <img src="ChocolateLavaCake.png" alt="Chocolate Lava Cake" />
+        <div class="menu-item-content">
+          <h4>Chocolate Lava Cake</h4>
+          <p>Warm chocolate cake with molten center, served with vanilla ice cream.</p>
+          <div class="price">$11</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" aria-label="Gallery">
+    <h2 class="section-title" data-aos="fade-up">Gallery</h2>
+    <div class="gallery-grid" data-aos="fade-up" data-aos-delay="200">
+      <a href="#img1"><img src="GrilledSalmon.png" alt="Grilled Salmon" /></a>
+      <a href="#img2"><img src="steak.png" alt="Steak" /></a>
+      <a href="#img3"><img src="NewYorkCheesecake.png" alt="Cheesecake" /></a>
+      <a href="#img4"><img src="RedWine.png" alt="Red Wine" /></a>
+      <a href="#img5"><img src="CockTail.png" alt="Cocktail" /></a>
+      <a href="#img6"><img src="ChocolateLavaCake.png" alt="Chocolate Lava Cake" /></a>
+    </div>
+
+    <!-- Lightbox modals -->
+    <div id="img1" class="lightbox" tabindex="-1" role="dialog" aria-modal="true" aria-label="Grilled Salmon Image">
+      <a href="#gallery" class="close" aria-label="Close">&times;</a>
+      <img src="GrilledSalmon.png" alt="Grilled Salmon" />
+    </div>
+    <div id="img2" class="lightbox" tabindex="-1" role="dialog" aria-modal="true" aria-label="Steak Image">
+      <a href="#gallery" class="close" aria-label="Close">&times;</a>
+      <img src="steak2.png" alt="Steak" />
+    </div>
+    <div id="img3" class="lightbox" tabindex="-1" role="dialog" aria-modal="true" aria-label="Cheesecake Image">
+      <a href="#gallery" class="close" aria-label="Close">&times;</a>
+      <img src="NewYorkCheesecake.png" alt="Cheesecake" />
+    </div>
+    <div id="img4" class="lightbox" tabindex="-1" role="dialog" aria-modal="true" aria-label="Red Wine Image">
+      <a href="#gallery" class="close" aria-label="Close">&times;</a>
+      <img src="RedWine.png" alt="Red Wine" />
+    </div>
+    <div id="img5" class="lightbox" tabindex="-1" role="dialog" aria-modal="true" aria-label="Cocktail Image">
+      <a href="#gallery" class="close" aria-label="Close">&times;</a>
+      <img src="CockTail.png" alt="Cocktail" />
+    </div>
+    <div id="img6" class="lightbox" tabindex="-1" role="dialog" aria-modal="true" aria-label="Chocolate Lava Cake Image">
+      <a href="#gallery" class="close" aria-label="Close">&times;</a>
+      <img src="ChocolateLavaCake.png" alt="Chocolate Lava Cake" />
+    </div>
+  </section>
+
+  <!-- Chefs -->
+  <section id="chefs" aria-label="Chefs">
+    <h2 class="section-title" data-aos="fade-up">Meet Our Chefs</h2>
+    <div class="chef-grid">
+      <div class="chef-card" data-aos="fade-up" data-aos-delay="100">
+        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Chef John Doe" />
+        <div class="chef-info">
+          <h4>John Doe</h4>
+          <p>Head Chef - Italian Cuisine Specialist with 15 years experience.</p>
+        </div>
+      </div>
+      <div class="chef-card" data-aos="fade-up" data-aos-delay="300">
+        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Chef Maria Lopez" />
+        <div class="chef-info">
+          <h4>Maria Lopez</h4>
+          <p>Pastry Chef - Expert in desserts and fine pastries with 10 years experience.</p>
+        </div>
+      </div>
+      <div class="chef-card" data-aos="fade-up" data-aos-delay="500">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Chef Ahmed Khan" />
+        <div class="chef-info">
+          <h4>Ahmed Khan</h4>
+          <p>Sous Chef - Fusion cuisine innovator with 8 years experience.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kitchen / Hygiene -->
+  <section id="kitchen" aria-label="Kitchen Hygiene">
+    <h2 class="section-title" data-aos="fade-up">Our Kitchen & Hygiene</h2>
+    <div class="kitchen-photos" data-aos="fade-up" data-aos-delay="200">
+      <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80" alt="Clean Kitchen" />
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80" alt="Food Preparation" />
+      <img src="https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=600&q=80" alt="Chef Preparing Food" />
+    </div>
+    <div class="video-wrapper" data-aos="fade-up" data-aos-delay="400">
+      <video controls muted loop playsinline>
+        <source src="https://cdn.pixabay.com/vimeo/458987610/food-restaurant-458987610.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <!-- Owner -->
+  <section id="owner" aria-label="Owner">
+    <h2 class="section-title" data-aos="fade-up">Our Owner</h2>
+    <img src="https://randomuser.me/api/portraits/men/99.jpg" alt="Owner Michael Smith" data-aos="fade-right" />
+    <div class="owner-bio" data-aos="fade-left" data-aos-delay="200">
+      <h3>Michael Smith</h3>
+      <p>Michael founded Gourmet Haven with a vision to bring world-class dining to the city. With a background in hospitality and a passion for culinary arts, he ensures every guest experiences excellence and warmth.</p>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section id="location" aria-label="Location">
+    <h2 class="section-title" data-aos="fade-up">Find Us</h2>
+    <p class="address" data-aos="fade-up" data-aos-delay="200">
+      123 Culinary Street, Foodie City, 45678<br />
+      Located in the vibrant downtown district, surrounded by art and culture.
+    </p>
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019337773652!2d-122.41941508468135!3d37.77492977975973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c5e4e2d6d%3A0x9f0a0e8f5d0a1b1b!2s123%20Culinary%20St%2C%20San%20Francisco%2C%20CA%2094103!5e0!3m2!1sen!2sus!4v1600000000000!5m2!1sen!2sus" 
+      allowfullscreen="" 
+      loading="lazy" 
+      aria-label="Google Map showing restaurant location"
+    ></iframe>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" aria-label="Contact">
+    <h2 class="section-title" data-aos="fade-up">Contact Us</h2>
+    <form data-aos="fade-up" data-aos-delay="200" id="contact-form" novalidate>
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" required aria-required="true" placeholder="Your full name" />
+      
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required aria-required="true" placeholder="you@example.com" />
+      
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" required aria-required="true" placeholder="Write your message here"></textarea>
+      
+      <button type="submit">Send Message</button>
+    </form>
+    <p class="info" aria-live="polite" id="form-message"></p>
+    <p class="info" data-aos="fade-up" data-aos-delay="400">
+      Email: contact@gourmethaven.com | Phone: +1 (555) 123-4567<br />
+      Opening Hours: Mon-Sun 11 AM - 11 PM
+    </p>
+  </section>
+
+  <!-- Footer -->
+  <footer aria-label="Footer">
+    <div class="social-links" role="navigation" aria-label="Social Media Links">
+      <a href="#" aria-label="Instagram" target="_blank" rel="noopener"><svg width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2a3 3 0 110 6 3 3 0 010-6zm-5 3a5 5 0 100 10 5 5 0 000-10z"/></svg></a>
+      <a href="#" aria-label="Facebook" target="_blank" rel="noopener"><svg width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M9 8H6v4h3v12h5V12h3.642l.358-4H14V6.5a1.5 1.5 0 011.5-1.5H18V1h-3a6 6 0 00-6 6v1z"/></svg></a>
+      <a href="#" aria-label="Twitter" target="_blank" rel="noopener"><svg width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M23 3a10.9 10.9 0 01-3.14.86 4.48 4.48 0 001.98-2.48 9.03 9.03 0 01-2.88 1.1 4.52 4.52 0 00-7.7 4.12A12.8 12.8 0 013 4.15a4.52 4.52 0 001.4 6.04 4.48 4.48 0 01-2.05-.57v.06a4.52 4.52 0 003.63 4.43 4.5 4.5 0 01-2.04.07 4.53 4.53 0 004.22 3.14A9 9 0 012 19.54 12.7 12.7 0 008.29 21c7.55 0 11.68-6.25 11.68-11.68 0-.18 0-.36-.01-.54A8.36 8.36 0 0023 3z"/></svg></a>
+    </div>
+    <div class="newsletter">
+      <form id="newsletter-form" aria-label="Newsletter Signup" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+        <input type="email" aria-label="Email address" placeholder="Subscribe to our newsletter" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+    <small>&copy; 2025 Gourmet Haven. All rights reserved.</small>
+    <div style="margin-top: 18px; font-size: 1rem; color: #e63946; text-align: center; letter-spacing: 0.5px;">
+  Made with 
+  <span style="color: #e63946; font-size: 1.2em; vertical-align: middle; animation: pulse 1.5s infinite;">&#10084;&#65039;</span>
+  by  Byteweave Studio</strong>
+</div>
+<style>
+@keyframes pulse {
+  0% { transform: scale(1);}
+  50% { transform: scale(1.2);}
+  100% { transform: scale(1);}
+}
+</style>
+
+  </footer>
+
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true,
+      duration: 800,
+      easing: 'ease-in-out',
+    });
+
+    // Menu tab switching
+    const tabs = document.querySelectorAll('#menu .menu-categories button');
+    const panels = document.querySelectorAll('#menu .menu-items');
+
+    tabs.forEach((tab, i) => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+
+        panels.forEach(panel => panel.hidden = true);
+        panels[i].hidden = false;
+      });
+    });
+
+    // Contact form validation and submission simulation
+    const form = document.getElementById('contact-form');
+    const formMessage = document.getElementById('form-message');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        formMessage.textContent = 'Please fill out all required fields correctly.';
+        formMessage.style.color = 'red';
+        return;
+      }
+      formMessage.textContent = 'Sending message...';
+      formMessage.style.color = '#e63946';
+
+      // Simulate sending
+      setTimeout(() => {
+        formMessage.textContent = 'Thank you for contacting us! We will get back to you shortly.';
+        form.reset();
+      }, 1500);
+    });
+
+    // Lightbox accessibility: close on Escape key
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        const openLightbox = document.querySelector('.lightbox:target');
+        if (openLightbox) {
+          window.location.hash = '#gallery';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
